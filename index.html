@@ -116,6 +116,7 @@ h1 em{font-style:normal;color:var(--green);}
 .stars{display:flex;gap:2px;margin-bottom:12px;align-items:center;}
 .star{width:12px;height:12px;background:var(--green);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
 .star.e{background:rgba(255,255,255,0.12);}
+.star.h{background:linear-gradient(90deg,var(--green) 50%,rgba(255,255,255,0.12) 50%);}
 .rating-text{font-size:12px;color:var(--text3);margin-left:6px;}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
 .tag{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:11px;padding:3px 10px;border-radius:6px;}
@@ -421,7 +422,7 @@ footer span{font-size:12px;color:var(--text3);}
 <script>
 const suppliers = [
   {name:"Elytra Labs",country:"USA",flag:"🇺🇸",rating:5,reviews:0,tags:["Lab Tested","24h dispatch","Overnight available"],peptides:[],shipping:"2-5 days",verified:true,url:"https://elytralabs.shop",note:"🇨🇦 Canada coming soon"},
-  {name:"Cernum Biosciences",country:"USA",flag:"🇺🇸",rating:5,reviews:0,tags:["Lab Tested","3rd Party COA","Janoshik Verified"],peptides:["Retatrutide","GHK-Cu","CJC-1295 / Ipamorelin","BPC-157 & TB-500","BPC-157"],shipping:"3 days",verified:true,url:"https://cernumbiosciences.com/"},
+  {name:"Cernum Biosciences",country:"USA",flag:"🇺🇸",rating:4.5,reviews:6,tags:["Lab Tested","3rd Party COA","Janoshik Verified"],peptides:["Retatrutide","GHK-Cu","CJC-1295 / Ipamorelin","BPC-157 & TB-500","BPC-157"],shipping:"3 days",verified:true,url:"https://cernumbiosciences.com/",judgeMe:true,featuredReview:"No clumping, perfect vacuum, high purity. Fast delivery and professional service. Would definitely recommend Cernum as a source for peptides."},
 ];
 
 
@@ -454,7 +455,8 @@ function renderFilters(){
 function setCountry(c){activeCountry=c;renderFilters();renderGrid();}
 
 function renderStars(n){
-  return Array.from({length:5},(_,i)=>`<div class="star${i>=n?' e':''}"></div>`).join('');
+  const full=Math.floor(n),half=n-full>=0.5?1:0,empty=5-full-half;
+  return '<div class="star"></div>'.repeat(full)+(half?'<div class="star h"></div>':'')+'<div class="star e"></div>'.repeat(empty);
 }
 
 function renderGrid(){
@@ -472,7 +474,8 @@ function renderGrid(){
         ${s.verified?'<div class="vbadge">Verified</div>':''}
       </div>
       <div class="scard-country">${s.flag} ${s.country}${s.note?` <span style="font-size:11px;color:var(--green);margin-left:6px;">${s.note}</span>`:''}</div>
-      <div class="stars">${renderStars(s.rating)}${s.reviews > 0 ? `<span class="rating-text">${s.rating}.0 (${s.reviews} reviews)</span>` : '<span class="rating-text">No reviews yet</span>'}</div>
+      <div class="stars">${renderStars(s.rating)}${s.reviews > 0 ? `<span class="rating-text">${s.rating} (${s.reviews} reviews)${s.judgeMe?' &nbsp;<span style="color:var(--green);font-size:10px;">✓ Judge.me</span>':''}</span>` : '<span class="rating-text">No reviews yet</span>'}</div>
+      ${s.featuredReview?`<div style="font-size:12px;color:var(--text2);font-style:italic;margin-bottom:12px;padding:8px 12px;background:rgba(255,255,255,0.03);border-left:2px solid rgba(93,217,138,0.3);border-radius:0 6px 6px 0;">"${s.featuredReview}"</div>`:''}
       <div class="tags">${s.tags.map(t=>`<div class="tag">${t}</div>`).join('')}</div>
       ${s.peptides&&s.peptides.length?`<div style="margin-bottom:14px;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">Top Peptides</div><div style="display:flex;flex-wrap:wrap;gap:5px;">${s.peptides.map(p=>`<span style="font-size:11px;color:var(--text2);background:rgba(93,217,138,0.06);border:0.5px solid rgba(93,217,138,0.15);padding:2px 9px;border-radius:4px;">${p}</span>`).join('')}</div></div>`:''}
       <div class="scard-footer">

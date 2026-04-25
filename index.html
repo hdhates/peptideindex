@@ -151,6 +151,33 @@ footer span{font-size:12px;color:var(--text3);}
 .footer-links a{font-size:12px;color:var(--text3);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:var(--text2);}
 .disclaimer{width:100%;font-size:11px;color:rgba(240,237,232,0.2);line-height:1.5;padding-top:1rem;border-top:0.5px solid var(--border);}
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  nav{padding:0.85rem 1.25rem;}
+  .logo{font-size:22px;}
+  .nav-links{gap:1.2rem;}
+  .nav-links a{font-size:13px;}
+  .nav-cta{display:none;}
+  .hero{padding:3.5rem 1.5rem 2rem;}
+  h1{font-size:clamp(28px,8vw,38px);transform:scaleX(1);letter-spacing:-0.5px;}
+  .hero-sub{font-size:14px;}
+  .cta-group{flex-direction:column;align-items:center;gap:10px;}
+  .btn-primary,.btn-ghost{width:100%;max-width:280px;text-align:center;}
+  .stats-row{gap:1.5rem;padding:1.5rem 1rem;}
+  .stat-num{font-size:24px;}
+  .section{padding:1.5rem 1.25rem;}
+  .steps{grid-template-columns:1fr;}
+  .features-grid{grid-template-columns:1fr;}
+  .supplier-grid{grid-template-columns:1fr;padding:0 1.25rem 3rem;}
+  .dir-header{padding:2rem 1.25rem 1.5rem;}
+  .form-wrap,.signup-wrap{padding:2rem 1.25rem;}
+  .plan-cards{grid-template-columns:1fr;}
+  footer{flex-direction:column;align-items:flex-start;gap:10px;padding:1.5rem 1.25rem;}
+  .footer-links{flex-wrap:wrap;gap:1rem;}
+  .email-row{flex-direction:column;}
+  .email-row input,.email-row button{width:100%;}
+}
 </style>
 </head>
 <body>

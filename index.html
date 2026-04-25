@@ -412,7 +412,8 @@ function suggestSupplier(){
   if(!name) return;
   const url = prompt('Their website?');
   if(!url) return;
-  prompt('Country?');
+  const country = prompt('Country?');
+  if(!country) return;
   alert('Thanks! We will review '+name+' and add them if verified.');
 }
 
@@ -440,7 +441,7 @@ function renderGrid(){
     const matchSearch = s.name.toLowerCase().includes(searchTerm)||s.tags.some(t=>t.toLowerCase().includes(searchTerm))||s.country.toLowerCase().includes(searchTerm);
     return matchCountry && matchSearch;
   });
-  if(!filtered.length){grid.innerHTML='<div class="no-results" style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-family:Syne,sans-serif;font-weight:700;margin-bottom:10px;color:var(--text);">Suppliers coming soon</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">We\'re currently verifying our first batch of suppliers. Check back soon or get notified when your country goes live.</p><button class="btn-primary" onclick="showPage(\'landing\')" style="font-size:13px;padding:10px 22px;">Join the waitlist →</button></div>';return;}
+  if(!filtered.length){grid.innerHTML='<div class="no-results" style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;margin-bottom:10px;color:var(--text);">Suppliers coming soon</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">We\'re currently verifying our first batch of suppliers. Check back soon or get notified when your country goes live.</p><button class="btn-primary" onclick="showPage(\'landing\')" style="font-size:13px;padding:10px 22px;">Join the waitlist →</button></div>';return;}
   grid.innerHTML = filtered.map(s=>`
     <div class="scard">
       <div class="scard-top">
@@ -469,25 +470,6 @@ function showPage(id){
   window.scrollTo(0,0);
 }
 
-function joinWaitlist(){
-  const em = document.getElementById('waitlist-email').value;
-  if(!em)return;
-  document.getElementById('waitlist-thanks').style.display='block';
-  document.getElementById('waitlist-email').value='';
-}
-
-function submitContact(){
-  document.getElementById('contact-success').style.display='block';
-}
-
-function submitSignup(){
-  document.getElementById('signup-success').style.display='block';
-}
-
-function selectPlan(p){
-  document.getElementById('plan-basic').classList.toggle('selected',p==='basic');
-  document.getElementById('plan-pro').classList.toggle('selected',p==='pro');
-}
 
 renderFilters();
 renderGrid();

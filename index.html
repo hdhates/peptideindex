@@ -264,7 +264,7 @@ footer span{font-size:12px;color:var(--text3);}
   <div class="cta-banner">
     <h2>Get early access</h2>
     <p>Join the waitlist — be first to know when new suppliers hit your country.</p>
-    <form action="https://formspree.io/f/xzdywbnw" method="POST" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <form id="waitlist-form" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
       <input type="hidden" name="subject" value="Waitlist signup"/>
       <div class="email-row">
         <input type="email" name="email" placeholder="your@email.com" required/>
@@ -407,7 +407,7 @@ footer span{font-size:12px;color:var(--text3);}
 
 <script>
 const suppliers = [
-  {name:"Elytra Labs",country:"USA",flag:"🇺🇸",rating:5,reviews:0,tags:["Lab Tested","24h dispatch","Overnight available"],shipping:"2-5 days",verified:true,url:"https://elytralabs.shop"},
+  {name:"Elytra Labs",country:"USA",flag:"🇺🇸",rating:5,reviews:0,tags:["Lab Tested","24h dispatch","Overnight available"],shipping:"2-5 days",verified:true,url:"https://elytralabs.shop",note:"🇨🇦 Canada coming soon"},
 ];
 
 
@@ -423,13 +423,7 @@ function trackClick(name, url){
 }
 
 function suggestSupplier(){
-  const name = prompt('Supplier name?');
-  if(!name) return;
-  const url = prompt('Their website?');
-  if(!url) return;
-  const country = prompt('Country?');
-  if(!country) return;
-  alert('Thanks! We will review '+name+' and add them if verified.');
+  showPage('contact');
 }
 
 function updateStats(){
@@ -463,7 +457,7 @@ function renderGrid(){
         <div class="scard-name">${s.name}</div>
         ${s.verified?'<div class="vbadge">Verified</div>':''}
       </div>
-      <div class="scard-country">${s.flag} ${s.country}${s.name==='Elytra Labs'?' <span style="font-size:11px;color:var(--green);margin-left:6px;">🇨🇦 Canada coming soon</span>':''}</div>
+      <div class="scard-country">${s.flag} ${s.country}${s.note?` <span style="font-size:11px;color:var(--green);margin-left:6px;">${s.note}</span>`:''}</div>
       <div class="stars">${renderStars(s.rating)}${s.reviews > 0 ? `<span class="rating-text">${s.rating}.0 (${s.reviews} reviews)</span>` : '<span class="rating-text">No reviews yet</span>'}</div>
       <div class="tags">${s.tags.map(t=>`<div class="tag">${t}</div>`).join('')}</div>
       <div class="scard-footer">
@@ -486,16 +480,34 @@ function showPage(id){
 }
 
 
+document.getElementById('waitlist-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('button[type="submit"]');
+  btn.textContent='Joining...';btn.disabled=true;
+  fetch('https://formspree.io/f/xzdywbnw',{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}})
+    .then(r=>{if(r.ok){e.target.reset();btn.textContent='Joined ✓';}else{btn.textContent='Join →';btn.disabled=false;}});
+});
+
 document.getElementById('contact-form').addEventListener('submit',function(e){
   e.preventDefault();
+  const btn=e.target.querySelector('.submit-btn');
+  btn.textContent='Sending...';btn.disabled=true;
   fetch('https://formspree.io/f/mrerdbrz',{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}})
-    .then(r=>{if(r.ok){e.target.reset();document.getElementById('contact-success').style.display='block';}});
+    .then(r=>{
+      if(r.ok){e.target.reset();document.getElementById('contact-success').style.display='block';}
+      btn.textContent='Send message';btn.disabled=false;
+    });
 });
 
 document.getElementById('signup-form').addEventListener('submit',function(e){
   e.preventDefault();
+  const btn=e.target.querySelector('.submit-btn');
+  btn.textContent='Submitting...';btn.disabled=true;
   fetch('https://formspree.io/f/xjgjzkjg',{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}})
-    .then(r=>{if(r.ok){e.target.reset();document.getElementById('signup-success').style.display='block';}});
+    .then(r=>{
+      if(r.ok){e.target.reset();document.getElementById('signup-success').style.display='block';}
+      btn.textContent='Submit for review →';btn.disabled=false;
+    });
 });
 
 renderFilters();

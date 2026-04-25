@@ -459,35 +459,54 @@ function renderStars(n){
   return '<div class="star"></div>'.repeat(full)+(half?'<div class="star h"></div>':'')+'<div class="star e"></div>'.repeat(empty);
 }
 
+function buildCard(s){
+  var h='<div class="scard">';
+  h+='<div class="scard-top"><div class="scard-name">'+s.name+'</div>'+(s.verified?'<div class="vbadge">Verified</div>':'')+'</div>';
+  h+='<div class="scard-country">'+s.flag+' '+s.country+(s.note?' <span style="font-size:11px;color:var(--green);margin-left:6px;">'+s.note+'</span>':'')+'</div>';
+  var judgeLink=s.judgeMe?' &nbsp;<a href="https://judge.me/reviews/cernumbiosciences.com" target="_blank" onclick="event.stopPropagation()" style="color:var(--green);font-size:10px;text-decoration:none;">✓ Judge.me</a>':'';
+  var ratingText=s.reviews>0?'<span class="rating-text">'+s.rating+' ('+s.reviews+' reviews)'+judgeLink+'</span>':'<span class="rating-text">No reviews yet</span>';
+  h+='<div class="stars">'+renderStars(s.rating)+ratingText+'</div>';
+  if(s.featuredReview){
+    h+='<div onclick="event.stopPropagation()" style="margin-bottom:12px;">';
+    h+='<div style="font-size:12px;color:var(--text2);font-style:italic;padding:8px 12px;background:rgba(255,255,255,0.03);border-left:2px solid rgba(93,217,138,0.3);border-radius:0 6px 6px 0;margin-bottom:6px;">"'+s.featuredReview+'"</div>';
+    if(s.allReviews){
+      h+='<button onclick="toggleReviews(this);event.stopPropagation()" style="background:none;border:none;color:var(--green);font-size:11px;cursor:pointer;padding:0;">See all '+s.reviews+' reviews ↓</button>';
+      h+='<div class="all-reviews" style="display:none;margin-top:8px;max-height:220px;overflow-y:auto;">';
+      s.allReviews.forEach(function(r){
+        h+='<div style="padding:8px 0;border-bottom:0.5px solid var(--border);">';
+        h+='<div style="display:flex;justify-content:space-between;margin-bottom:3px;">';
+        h+='<span style="font-size:12px;font-weight:500;color:var(--text);">'+r.author+'</span>';
+        h+='<span style="font-size:11px;color:var(--green);">';
+        for(var i=0;i<r.rating;i++)h+='★';
+        for(var i=r.rating;i<5;i++)h+='☆';
+        h+='</span></div>';
+        h+='<p style="font-size:12px;color:var(--text2);">'+r.text+'</p>';
+        h+='</div>';
+      });
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+  h+='<div class="tags">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
+  if(s.peptides&&s.peptides.length){
+    h+='<div style="margin-bottom:14px;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">Top Peptides</div><div style="display:flex;flex-wrap:wrap;gap:5px;">';
+    s.peptides.forEach(function(p){h+='<span style="font-size:11px;color:var(--text2);background:rgba(93,217,138,0.06);border:0.5px solid rgba(93,217,138,0.15);padding:2px 9px;border-radius:4px;">'+p+'</span>';});
+    h+='</div></div>';
+  }
+  h+='<div class="scard-footer"><span class="scard-meta">Ships in '+s.shipping+'</span><button class="visit-btn" onclick="trackClick(\''+s.name+'\',\''+s.url+'\')">Visit site →</button></div>';
+  h+='</div>';
+  return h;
+}
+
 function renderGrid(){
-  const grid = document.getElementById('supplier-grid');
-  const filtered = suppliers.filter(s=>{
-    const matchCountry = activeCountry==='All'||s.country===activeCountry;
-    const matchSearch = s.name.toLowerCase().includes(searchTerm)||s.tags.some(t=>t.toLowerCase().includes(searchTerm))||s.country.toLowerCase().includes(searchTerm);
-    return matchCountry && matchSearch;
+  const grid=document.getElementById('supplier-grid');
+  const filtered=suppliers.filter(function(s){
+    var matchCountry=activeCountry==='All'||s.country===activeCountry;
+    var matchSearch=s.name.toLowerCase().includes(searchTerm)||s.tags.some(function(t){return t.toLowerCase().includes(searchTerm);})||s.country.toLowerCase().includes(searchTerm);
+    return matchCountry&&matchSearch;
   });
-  if(!filtered.length){grid.innerHTML='<div class="no-results" style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text);">Suppliers coming soon</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">We\'re currently verifying our first batch of suppliers. Check back soon or get notified when your country goes live.</p><button class="btn-primary" onclick="showPage(\'landing\')" style="font-size:13px;padding:10px 22px;">Join the waitlist →</button></div>';return;}
-  grid.innerHTML = filtered.map(s=>`
-    <div class="scard">
-      <div class="scard-top">
-        <div class="scard-name">${s.name}</div>
-        ${s.verified?'<div class="vbadge">Verified</div>':''}
-      </div>
-      <div class="scard-country">${s.flag} ${s.country}${s.note?` <span style="font-size:11px;color:var(--green);margin-left:6px;">${s.note}</span>`:''}</div>
-      <div class="stars">${renderStars(s.rating)}${s.reviews > 0 ? `<span class="rating-text">${s.rating} (${s.reviews} reviews)${s.judgeMe ? ` &nbsp;<a href="https://judge.me/reviews/cernumbiosciences.com" target="_blank" onclick="event.stopPropagation()" style="color:var(--green);font-size:10px;text-decoration:none;">✓ Judge.me</a>` : ''}</span>` : '<span class="rating-text">No reviews yet</span>'}</div>
-      ${s.featuredReview?`<div onclick="event.stopPropagation()" style="margin-bottom:12px;">
-        <div style="font-size:12px;color:var(--text2);font-style:italic;padding:8px 12px;background:rgba(255,255,255,0.03);border-left:2px solid rgba(93,217,138,0.3);border-radius:0 6px 6px 0;margin-bottom:6px;">"${s.featuredReview}"</div>
-        ${s.allReviews?`<button onclick="toggleReviews(this);event.stopPropagation()" style="background:none;border:none;color:var(--green);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;">See all ${s.reviews} reviews ↓</button>
-        <div class="all-reviews" style="display:none;margin-top:8px;max-height:220px;overflow-y:auto;">${s.allReviews.map(r=>`<div style="padding:8px 0;border-bottom:0.5px solid var(--border);"><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span style="font-size:12px;font-weight:500;color:var(--text);">${r.author}</span><span style="font-size:11px;color:var(--green);">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span></div><p style="font-size:12px;color:var(--text2);">${r.text}</p></div>`).join('')}</div>`:''}
-      </div>`:''}
-      <div class="tags">${s.tags.map(t=>`<div class="tag">${t}</div>`).join('')}</div>
-      ${s.peptides&&s.peptides.length?`<div style="margin-bottom:14px;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">Top Peptides</div><div style="display:flex;flex-wrap:wrap;gap:5px;">${s.peptides.map(p=>`<span style="font-size:11px;color:var(--text2);background:rgba(93,217,138,0.06);border:0.5px solid rgba(93,217,138,0.15);padding:2px 9px;border-radius:4px;">${p}</span>`).join('')}</div></div>`:''}
-      <div class="scard-footer">
-        <span class="scard-meta">Ships in ${s.shipping}</span>
-        <button class="visit-btn" onclick="trackClick('${s.name}', '${s.url}')">Visit site →</button>
-      </div>
-    </div>
-  `).join('');
+  if(!filtered.length){grid.innerHTML='<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text);">Suppliers coming soon</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">We\'re currently verifying our first batch of suppliers. Check back soon.</p><button class="btn-primary" onclick="showPage(\'landing\')" style="font-size:13px;padding:10px 22px;">Join the waitlist →</button></div>';return;}
+  grid.innerHTML=filtered.map(buildCard).join('');
 }
 
 function filterSuppliers(){

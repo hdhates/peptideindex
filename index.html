@@ -513,13 +513,15 @@ function renderGrid(){
   const grid=document.getElementById('supplier-grid');
   const filtered=suppliers.filter(function(s){
     var matchCountry=activeCountry==='All'||s.country===activeCountry;
-    var matchSearch=s.name.toLowerCase().includes(searchTerm)||s.tags.some(function(t){return t.toLowerCase().includes(searchTerm);})||s.country.toLowerCase().includes(searchTerm)||(s.peptides&&s.peptides.some(function(p){return p.toLowerCase().includes(searchTerm);}));
+    var norm=normalize(searchTerm);
+    var matchSearch=s.name.toLowerCase().includes(searchTerm)||normalize(s.name).includes(norm)||s.tags.some(function(t){return t.toLowerCase().includes(searchTerm)||normalize(t).includes(norm);})||s.country.toLowerCase().includes(searchTerm)||(s.peptides&&s.peptides.some(function(p){return p.toLowerCase().includes(searchTerm)||normalize(p).includes(norm);}));
     return matchCountry&&matchSearch;
   });
   if(!filtered.length){grid.innerHTML='<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text);">Suppliers coming soon</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">We\'re currently verifying our first batch of suppliers. Check back soon.</p><button class="btn-primary" onclick="showPage(\'landing\')" style="font-size:13px;padding:10px 22px;">Join the waitlist →</button></div>';return;}
   grid.innerHTML=filtered.map(buildCard).join('');
 }
 
+function normalize(s){return s.toLowerCase().replace(/[^a-z0-9]/g,'');}
 function filterSuppliers(){
   searchTerm = document.getElementById('search-input').value.toLowerCase();
   renderGrid();

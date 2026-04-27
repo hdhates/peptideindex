@@ -230,9 +230,9 @@ footer span{font-size:12px;color:var(--text3);}
     <li><a href="#" onclick="showPage('landing');closeNav();return false;">Home</a></li>
     <li><a href="#" onclick="showPage('directory');closeNav();return false;">Directory</a></li>
     <li><a href="#" onclick="showPage('contact');closeNav();return false;">Contact</a></li>
-    <li class="nav-cta-mobile"><a href="#" onclick="showPage('signup');closeNav();return false;">List your supplier</a></li>
+    <li class="nav-cta-mobile"><a href="#" onclick="showPage('verify');closeNav();return false;">How we verify</a></li>
   </ul>
-  <button class="nav-cta" onclick="showPage('signup')">List your supplier</button>
+  <button class="nav-cta" onclick="showPage('verify')">How we verify</button>
   <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -461,6 +461,56 @@ footer span{font-size:12px;color:var(--text3);}
   </div>
 </div>
 
+<!-- ══════════════ HOW WE VERIFY ══════════════ -->
+<div id="verify" class="page">
+  <div class="form-wrap">
+    <h2>How we verify</h2>
+    <p>Every supplier on PeptideRadar goes through the same process before going live. Here's exactly what we check.</p>
+    <div style="display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem;">
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">1</div>
+        <div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We reach out directly</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7;">Every supplier is personally contacted by our team. No supplier can self-list — we initiate or verify every application before anything goes live.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">2</div>
+        <div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We check lab testing</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7;">We verify whether suppliers offer third-party lab testing or Certificates of Analysis (COAs). Suppliers with verified testing get a badge on their listing.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">3</div>
+        <div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We review community feedback</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7;">We cross-reference reviews from trusted platforms like Judge.me and community forums. Suppliers with a history of complaints or scam reports are not listed.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">4</div>
+        <div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We verify shipping & operations</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7;">Shipping times, countries served, and operational status are all confirmed before listing. Outdated or inactive suppliers are removed.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">5</div>
+        <div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">Listings are monitored ongoing</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.7;">Getting listed isn't permanent. We monitor suppliers over time and remove any that no longer meet our standards. You can report issues via our contact page.</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;padding:1.25rem;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);border-radius:12px;">
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;color:var(--green);margin-bottom:6px;">Want to suggest a supplier?</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:12px;">If you know a supplier that should be on PeptideRadar, let us know and we'll look into it.</div>
+      <button class="btn-primary" onclick="showPage('contact')" style="font-size:13px;padding:10px 22px;">Suggest a supplier →</button>
+    </div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-col">
     <div class="logo">Peptide<span>Radar</span></div>
@@ -471,7 +521,7 @@ footer span{font-size:12px;color:var(--text3);}
       <a href="#" onclick="showPage('landing');return false;">Home</a>
       <a href="#" onclick="showPage('directory');return false;">Directory</a>
       <a href="#" onclick="showPage('contact');return false;">Contact</a>
-      <a href="#" onclick="showPage('signup');return false;">List supplier</a>
+      <a href="#" onclick="showPage('verify');return false;">How we verify</a>
     </div>
     <span>© 2026 PeptideRadar</span>
   </div>

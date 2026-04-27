@@ -533,14 +533,15 @@ footer span{font-size:12px;color:var(--text3);}
 
 <script>
 const suppliers = [
-  {name:"Elytra Labs",country:"USA",flag:"🇺🇸",rating:5,reviews:0,tags:["Lab Tested","24h dispatch","Overnight available"],peptides:["Retatrutide","BPC-157","CJC-1295 / Ipamorelin","GHK-Cu","MT-2"],shipping:"2-5 days",verified:true,url:"https://elytralabs.shop",note:"🇨🇦 Canada coming soon"},
-  {name:"Cernum Biosciences",country:"USA",flag:"🇺🇸",rating:4.5,reviews:6,tags:["Lab Tested","3rd Party COA","Janoshik Verified"],peptides:["Retatrutide","GHK-Cu","CJC-1295 / Ipamorelin","BPC-157 & TB-500","BPC-157"],shipping:"3 days",verified:true,url:"https://cernumbiosciences.com/",judgeMe:true,featuredReview:"No clumping, perfect vacuum, high purity. Fast delivery and professional service. Would definitely recommend Cernum as a source for peptides.",allReviews:[{author:"Sensei",rating:5,text:"No clumping, perfect vacuum, high purity. Fast delivery and professional service. Would definitely recommend Cernum as a source for peptides."},{author:"Karli Sterling",rating:5,text:"Shipped reasonably quick - quality material. Thank you and I'll be ordering again."},{author:"Raymel Poche",rating:5,text:"Like to order more."},{author:"T.s.",rating:5,text:"No issues with this peptide."},{author:"T.s.",rating:4,text:"Shipping took a little longer than posted and customer service responses were not as prompt, but overall it was ok."},{author:"Tyrone Walker",rating:3,text:"Too early to tell. Two weeks in, no real fat loss and sleep might have improved slightly. Shipping was slow after purchase."}]},
-  {name:"Particle Peptides",country:"EU",flag:"🇪🇺",rating:5,reviews:0,tags:["Lab Tested","HPLC Verified","Endotoxin Tested","Heavy Metals Tested"],peptides:["BPC-157","TB-500","GHK-Cu","Ipamorelin","GLP-3"],shipping:"2-5 days EU",verified:true,url:"https://particlepeptides.com",note:"🇸🇰 Slovakia-based"},
-  {name:"EuroPeptides",country:"EU",flag:"🇪🇺",rating:5,reviews:0,tags:["Lab Tested","Janoshik Verified","3rd Party COA"],peptides:["Retatrutide","GHK-Cu","BPC-157","Melanotan II","Semax"],shipping:"1-7 days EU",verified:true,url:"https://europeptides.de",note:"🇦🇹 Austria-based · Ships EU + CH"},
+  {name:"Elytra Labs",country:"USA",flag:"🇺🇸",rating:5,reviews:0,tags:["Lab Tested","24h dispatch","Overnight available"],peptides:["Retatrutide","BPC-157","CJC-1295 / Ipamorelin","GHK-Cu","MT-2"],shipping:"2-5 days",verified:true,url:"https://elytralabs.shop",note:"🇨🇦 Canada coming soon",shipsTo:["USA"]},
+  {name:"Cernum Biosciences",country:"USA",flag:"🇺🇸",rating:4.5,reviews:6,tags:["Lab Tested","3rd Party COA","Janoshik Verified"],peptides:["Retatrutide","GHK-Cu","CJC-1295 / Ipamorelin","BPC-157 & TB-500","BPC-157"],shipping:"3 days",verified:true,url:"https://cernumbiosciences.com/",judgeMe:true,featuredReview:"No clumping, perfect vacuum, high purity. Fast delivery and professional service. Would definitely recommend Cernum as a source for peptides.",allReviews:[{author:"Sensei",rating:5,text:"No clumping, perfect vacuum, high purity. Fast delivery and professional service. Would definitely recommend Cernum as a source for peptides."},{author:"Karli Sterling",rating:5,text:"Shipped reasonably quick - quality material. Thank you and I'll be ordering again."},{author:"Raymel Poche",rating:5,text:"Like to order more."},{author:"T.s.",rating:5,text:"No issues with this peptide."},{author:"T.s.",rating:4,text:"Shipping took a little longer than posted and customer service responses were not as prompt, but overall it was ok."},{author:"Tyrone Walker",rating:3,text:"Too early to tell. Two weeks in, no real fat loss and sleep might have improved slightly. Shipping was slow after purchase."}],shipsTo:["USA"]},
+  {name:"Particle Peptides",country:"EU",flag:"🇪🇺",rating:5,reviews:0,tags:["Lab Tested","HPLC Verified","Endotoxin Tested","Heavy Metals Tested"],peptides:["BPC-157","TB-500","GHK-Cu","Ipamorelin","GLP-3"],shipping:"2-5 days EU",verified:true,url:"https://particlepeptides.com",note:"🇸🇰 Slovakia-based",shipsTo:["Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden"]},
+  {name:"EuroPeptides",country:"EU",flag:"🇪🇺",rating:5,reviews:0,tags:["Lab Tested","Janoshik Verified","3rd Party COA"],peptides:["Retatrutide","GHK-Cu","BPC-157","Melanotan II","Semax"],shipping:"1-7 days EU",verified:true,url:"https://europeptides.de",note:"🇦🇹 Austria-based · Ships EU + CH",shipsTo:["Austria","Belgium","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Latvia","Lithuania","Luxembourg","Malta","Netherlands","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden","Switzerland"]},
 ];
 
 
-const countries = [...new Set(suppliers.map(s=>s.country))];
+const flagMap={"USA":"🇺🇸","Canada":"🇨🇦","Germany":"🇩🇪","France":"🇫🇷","Spain":"🇪🇸","Italy":"🇮🇹","Netherlands":"🇳🇱","Belgium":"🇧🇪","Austria":"🇦🇹","Sweden":"🇸🇪","Denmark":"🇩🇰","Finland":"🇫🇮","Norway":"🇳🇴","Poland":"🇵🇱","Czech Republic":"🇨🇿","Slovakia":"🇸🇰","Hungary":"🇭🇺","Romania":"🇷🇴","Bulgaria":"🇧🇬","Croatia":"🇭🇷","Slovenia":"🇸🇮","Greece":"🇬🇷","Portugal":"🇵🇹","Ireland":"🇮🇪","Switzerland":"🇨🇭","Luxembourg":"🇱🇺","Estonia":"🇪🇪","Latvia":"🇱🇻","Lithuania":"🇱🇹","Malta":"🇲🇹","Cyprus":"🇨🇾","UK":"🇬🇧","Australia":"🇦🇺"};
+const allShipCountries=[...new Set(suppliers.flatMap(s=>s.shipsTo||[s.country]))].sort();
 let activeCountry = 'All';
 let searchTerm = '';
 
@@ -563,7 +564,7 @@ function updateStats(){
 function renderFilters(){
   const el = document.getElementById('country-filters');
   if(!suppliers.length){el.style.display='none';return;}
-  el.innerHTML = ['All',...countries].map(c=>`<div class="cf ${c===activeCountry?'active':''}" onclick="setCountry('${c}')">${c==='All'?'🌍 All countries':suppliers.find(s=>s.country===c).flag+' '+c}</div>`).join('');
+  el.innerHTML = ['All',...allShipCountries].map(c=>`<div class="cf ${c===activeCountry?'active':''}" onclick="setCountry('${c}')">${c==='All'?'🌍 All countries':(flagMap[c]||'🏳')+' '+c}</div>`).join('');
 }
 
 function setCountry(c){activeCountry=c;renderFilters();renderGrid();}
@@ -618,7 +619,7 @@ function buildCard(s){
 function renderGrid(){
   const grid=document.getElementById('supplier-grid');
   const filtered=suppliers.filter(function(s){
-    var matchCountry=activeCountry==='All'||s.country===activeCountry;
+    var matchCountry=activeCountry==='All'||(s.shipsTo?s.shipsTo.includes(activeCountry):s.country===activeCountry);
     var norm=normalize(searchTerm);
     var matchSearch=s.name.toLowerCase().includes(searchTerm)||normalize(s.name).includes(norm)||s.tags.some(function(t){return t.toLowerCase().includes(searchTerm)||normalize(t).includes(norm);})||s.country.toLowerCase().includes(searchTerm)||(s.peptides&&s.peptides.some(function(p){return p.toLowerCase().includes(searchTerm)||normalize(p).includes(norm);}));
     return matchCountry&&matchSearch;

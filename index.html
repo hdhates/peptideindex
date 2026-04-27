@@ -632,7 +632,7 @@ function renderGrid(){
 function normalize(s){return s.toLowerCase().replace(/[^a-z0-9]/g,'');}
 function editDist(a,b){
   var la=a.length,lb=b.length;
-  if(Math.abs(la-lb)>3)return 99;
+  if(Math.abs(la-lb)>5)return 99;
   var d=[];
   for(var i=0;i<=la;i++){d[i]=[i];for(var j=1;j<=lb;j++)d[i][j]=i?0:j;}
   for(var i=1;i<=la;i++)for(var j=1;j<=lb;j++){
@@ -646,7 +646,7 @@ function fuzzyMatch(term,str){
   var n=normalize(term),s=normalize(str);
   if(n.length<4)return false;
   if(s.includes(n))return true;
-  return editDist(n,s)<=(n.length>=8?2:1);
+  return editDist(n,s)<=(n.length>=5?2:1);
 }
 function filterSuppliers(){
   searchTerm = document.getElementById('search-input').value.toLowerCase();

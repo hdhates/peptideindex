@@ -540,7 +540,8 @@ const suppliers = [
 ];
 
 
-const flagMap={"USA":"🇺🇸","United States":"🇺🇸","Canada":"🇨🇦","Germany":"🇩🇪","France":"🇫🇷","Spain":"🇪🇸","Italy":"🇮🇹","Netherlands":"🇳🇱","Belgium":"🇧🇪","Austria":"🇦🇹","Sweden":"🇸🇪","Denmark":"🇩🇰","Finland":"🇫🇮","Norway":"🇳🇴","Poland":"🇵🇱","Czech Republic":"🇨🇿","Slovakia":"🇸🇰","Hungary":"🇭🇺","Romania":"🇷🇴","Bulgaria":"🇧🇬","Croatia":"🇭🇷","Slovenia":"🇸🇮","Greece":"🇬🇷","Portugal":"🇵🇹","Ireland":"🇮🇪","Switzerland":"🇨🇭","Luxembourg":"🇱🇺","Estonia":"🇪🇪","Latvia":"🇱🇻","Lithuania":"🇱🇹","Malta":"🇲🇹","Cyprus":"🇨🇾","UK":"🇬🇧","Australia":"🇦🇺"};
+const codeMap={"United States":"us","Canada":"ca","Germany":"de","France":"fr","Spain":"es","Italy":"it","Netherlands":"nl","Belgium":"be","Austria":"at","Sweden":"se","Denmark":"dk","Finland":"fi","Norway":"no","Poland":"pl","Czech Republic":"cz","Slovakia":"sk","Hungary":"hu","Romania":"ro","Bulgaria":"bg","Croatia":"hr","Slovenia":"si","Greece":"gr","Portugal":"pt","Ireland":"ie","Switzerland":"ch","Luxembourg":"lu","Estonia":"ee","Latvia":"lv","Lithuania":"lt","Malta":"mt","Cyprus":"cy","UK":"gb","Australia":"au"};
+function flagImg(country,h){var c=codeMap[country];return c?'<img src="https://flagcdn.com/'+h+'/'+c+'.png" style="vertical-align:middle;border-radius:2px;margin-right:4px;" alt="'+country+'" loading="lazy">'  :'';}
 const allShipCountries=[...new Set(suppliers.flatMap(s=>s.shipsTo||[s.country]))].sort();
 let activeCountry = 'All';
 let searchTerm = '';
@@ -564,7 +565,7 @@ function updateStats(){
 function renderFilters(){
   const el = document.getElementById('country-filters');
   if(!suppliers.length){el.style.display='none';return;}
-  el.innerHTML = ['All',...allShipCountries].map(c=>`<div class="cf ${c===activeCountry?'active':''}" onclick="setCountry('${c}')">${c==='All'?'🌍 All countries':(flagMap[c]||'🏳')+' '+c}</div>`).join('');
+  el.innerHTML = ['All',...allShipCountries].map(c=>`<div class="cf ${c===activeCountry?'active':''}" onclick="setCountry('${c}')">${c==='All'?'🌍 All countries':flagImg(c,'16x12')+c}</div>`).join('');
 }
 
 function setCountry(c){activeCountry=c;renderFilters();renderGrid();}
@@ -577,7 +578,7 @@ function renderStars(n){
 function buildCard(s){
   var h='<div class="scard">';
   h+='<div class="scard-top"><div class="scard-name">'+s.name+'</div>'+(s.verified?'<div class="vbadge">Verified</div>':'')+'</div>';
-  h+='<div class="scard-country">'+s.flag+' '+s.country+(s.note?' <span style="font-size:11px;color:var(--green);margin-left:6px;">'+s.note+'</span>':'')+'</div>';
+  h+='<div class="scard-country">'+flagImg(s.country,'20x15')+s.country+(s.note?' <span style="font-size:11px;color:var(--green);margin-left:6px;">'+s.note+'</span>':'')+'</div>';
   var judgeLink=s.judgeMe?' &nbsp;<span style="color:var(--green);font-size:10px;">✓ Judge.me</span>':'';
   if(s.reviews>0){
     h+='<div class="stars">'+renderStars(s.rating)+'<span class="rating-text">'+s.rating+' ('+s.reviews+' reviews)'+judgeLink+'</span></div>';

@@ -48,8 +48,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .nav-links a{color:var(--text2);text-decoration:none;font-size:15px;font-weight:500;transition:color 0.2s;}
 .nav-links a:hover{color:var(--text);}
 .nav-links a.active{color:var(--green);}
-.nav-cta{background:var(--green);color:#0a0a0f;border:none;padding:12px 26px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity 0.2s,transform 0.15s;letter-spacing:0.1px;}
-.nav-cta:hover{opacity:0.85;transform:translateY(-1px);}
+.nav-cta{background:linear-gradient(90deg,#0a0a0f 50%,var(--green) 50%);background-size:200% 100%;background-position:right center;color:#0a0a0f;border:0.5px solid var(--green);padding:11px 24px;border-radius:100px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background-position 0.4s ease,color 0.4s,transform 0.15s;letter-spacing:0.1px;}
+@media(hover:hover){.nav-cta:hover{background-position:left center;color:var(--green);transform:translateY(-1px);}}
 
 /* HAMBURGER */
 .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
@@ -463,49 +463,59 @@ footer span{font-size:12px;color:var(--text3);}
 
 <!-- ══════════════ HOW WE VERIFY ══════════════ -->
 <div id="verify" class="page">
-  <div class="form-wrap">
-    <h2>How we verify</h2>
-    <p>Every supplier on PeptideRadar goes through the same process before going live. Here's exactly what we check.</p>
-    <div style="display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem;">
-      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
-        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">1</div>
+  <div class="form-wrap" style="max-width:640px;">
+    <div class="badge" style="margin-bottom:1rem;">Our process</div>
+    <h2 style="color:var(--green);margin-bottom:0.5rem;">How we verify</h2>
+    <p style="margin-bottom:2.5rem;">Every supplier on PeptideRadar goes through the same process before going live. No shortcuts, no exceptions.</p>
+
+    <div style="position:relative;display:flex;flex-direction:column;gap:0;">
+
+      <div style="position:absolute;left:17px;top:36px;bottom:36px;width:1px;background:linear-gradient(180deg,rgba(93,217,138,0.4),rgba(93,217,138,0.05));"></div>
+
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;padding:1.25rem;border:0.5px solid var(--border);border-radius:14px;background:var(--bg2);margin-bottom:10px;position:relative;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#0a0a0f;font-size:13px;flex-shrink:0;">1</div>
         <div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We reach out directly</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.7;">Every supplier is personally contacted by our team. No supplier can self-list — we initiate or verify every application before anything goes live.</div>
         </div>
       </div>
-      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
-        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">2</div>
+
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;padding:1.25rem;border:0.5px solid var(--border);border-radius:14px;background:var(--bg2);margin-bottom:10px;position:relative;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#0a0a0f;font-size:13px;flex-shrink:0;">2</div>
         <div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We check lab testing</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.7;">We verify whether suppliers offer third-party lab testing or Certificates of Analysis (COAs). Suppliers with verified testing get a badge on their listing.</div>
         </div>
       </div>
-      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
-        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">3</div>
+
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;padding:1.25rem;border:0.5px solid var(--border);border-radius:14px;background:var(--bg2);margin-bottom:10px;position:relative;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#0a0a0f;font-size:13px;flex-shrink:0;">3</div>
         <div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We review community feedback</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.7;">We cross-reference reviews from trusted platforms like Judge.me and community forums. Suppliers with a history of complaints or scam reports are not listed.</div>
         </div>
       </div>
-      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
-        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">4</div>
+
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;padding:1.25rem;border:0.5px solid var(--border);border-radius:14px;background:var(--bg2);margin-bottom:10px;position:relative;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#0a0a0f;font-size:13px;flex-shrink:0;">4</div>
         <div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">We verify shipping & operations</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.7;">Shipping times, countries served, and operational status are all confirmed before listing. Outdated or inactive suppliers are removed.</div>
         </div>
       </div>
-      <div style="display:flex;gap:1.25rem;align-items:flex-start;">
-        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--green);font-size:14px;">5</div>
+
+      <div style="display:flex;gap:1.25rem;align-items:flex-start;padding:1.25rem;border:0.5px solid var(--border);border-radius:14px;background:var(--bg2);position:relative;">
+        <div style="min-width:36px;height:36px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:#0a0a0f;font-size:13px;flex-shrink:0;">5</div>
         <div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px;">Listings are monitored ongoing</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.7;">Getting listed isn't permanent. We monitor suppliers over time and remove any that no longer meet our standards. You can report issues via our contact page.</div>
         </div>
       </div>
     </div>
-    <div style="margin-top:2.5rem;padding:1.25rem;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.3);border-radius:12px;">
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:14px;color:var(--green);margin-bottom:6px;">Want to suggest a supplier?</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:12px;">If you know a supplier that should be on PeptideRadar, let us know and we'll look into it.</div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--green-dim);border:0.5px solid rgba(93,217,138,0.25);border-radius:14px;">
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:15px;color:var(--green);margin-bottom:6px;">Know a supplier we should list?</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.7;">If you've had a good experience with a supplier that isn't on PeptideRadar, let us know and we'll look into it.</div>
       <button class="btn-primary" onclick="showPage('contact')" style="font-size:13px;padding:10px 22px;">Suggest a supplier →</button>
     </div>
   </div>

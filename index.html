@@ -627,18 +627,12 @@ function renderFilters(){
     return `<div class="cf ${c===activeCountry?'active':''}" data-country="${c}" onclick="setCountry('${c}')">${label}</div>`;
   }).join('');
   const desktopPills=rest.map(c=>`<div class="cf ${c===activeCountry?'active':''}" data-country="${c}" onclick="setCountry('${c}')">${flagEmoji(c)+c}</div>`).join('');
-  const moreSelect=`<select class="cf-more ${isRestActive?'active':''}" id="more-countries-select" onchange="setCountry(this.value)">
-    <option value="" disabled ${!isRestActive?'selected':''}>More countries ▾</option>
-    ${rest.map(c=>`<option value="${c}" ${c===activeCountry?'selected':''}>${c}</option>`).join('')}
-  </select>`;
-  el.innerHTML=pinned+desktopPills+moreSelect;
+  el.innerHTML=pinned+desktopPills;
 }
 
 function setCountry(c){
   activeCountry=c;
   document.querySelectorAll('#country-filters [data-country]').forEach(el=>el.classList.toggle('active',el.dataset.country===c));
-  const sel=document.getElementById('more-countries-select');
-  if(sel){const isRest=c&&[...sel.options].some(o=>o.value===c);sel.classList.toggle('active',isRest);sel.value=isRest?c:'';}
   track('Filtered by Country', {country: c});
   renderGrid();
 }

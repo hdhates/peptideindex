@@ -123,7 +123,10 @@ h1 em{font-style:normal;color:var(--green);}
 .country-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
 .cf{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:12px;padding:6px 14px;border-radius:100px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
 .cf:hover,.cf.active{background:var(--green-dim);border-color:rgba(126,232,162,0.4);color:var(--green);}
-@media(max-width:640px){.country-filters{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:none;}.country-filters::-webkit-scrollbar{display:none;}}
+.cf-select{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:12px;padding:6px 28px 6px 14px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;appearance:none;-webkit-appearance:none;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(240%2C237%2C232%2C0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;display:none;}
+.cf-select.active{background-color:var(--green-dim);border-color:rgba(126,232,162,0.4);color:var(--green);}
+.cf-select option{background:#111118;color:#f0ede8;}
+@media(max-width:640px){.cf-rest{display:none;}.cf-select{display:inline-block;}}
 .supplier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:0 2rem 4rem;max-width:1100px;margin:0 auto;align-items:stretch;}
 .scard{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.2s;display:flex;flex-direction:column;}
 .scard:hover{border-color:rgba(126,232,162,0.35);background:var(--bg3);transform:translateY(-2px);}
@@ -622,14 +625,23 @@ function renderFilters(){
     const label=c==='All'?'🌍 All':c==='Europe'?'<img src="https://flagcdn.com/16x12/eu.png" style="vertical-align:middle;border-radius:2px;margin-right:5px;" alt=""> Europe':flagEmoji(c)+c;
     return `<div class="cf ${c===activeCountry?'active':''}" data-country="${c}" onclick="setCountry('${c}')">${label}</div>`;
   }).join('');
-  const restPills=rest.map(c=>`<div class="cf ${c===activeCountry?'active':''}" data-country="${c}" onclick="setCountry('${c}')">${flagEmoji(c)+c}</div>`).join('');
-  el.innerHTML=pinned+restPills;
+  const restPills=rest.map(c=>`<div class="cf cf-rest ${c===activeCountry?'active':''}" data-country="${c}" onclick="setCountry('${c}')">${flagEmoji(c)+c}</div>`).join('');
+  const isRestActive=rest.includes(activeCountry);
+  const restOptions=rest.map(c=>`<option value="${c}" ${c===activeCountry?'selected':''}>${c}</option>`).join('');
+  const selectEl=`<select class="cf-select${isRestActive?' active':''}" onchange="if(this.value)setCountry(this.value)"><option value="">More countries…</option>${restOptions}</select>`;
+  el.innerHTML=pinned+restPills+selectEl;
 }
 
 function setCountry(c){
   activeCountry=c;
   document.querySelectorAll('#country-filters [data-country]').forEach(el=>el.classList.toggle('active',el.dataset.country===c));
-  track('Filtered by Country', {country: c});
+  const sel=document.querySelector('#country-filters .cf-select');
+  if(sel){
+    const isRest=!pinnedFilters.includes(c);
+    sel.value=isRest?c:'';
+    sel.classList.toggle('active',isRest);
+  }
+  track('Filtered by Country',{country:c});
   renderGrid();
 }
 

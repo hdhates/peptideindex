@@ -176,16 +176,25 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 .section-divider{border:none;border-top:0.5px solid var(--border);margin:1.5rem 0;}
 
 /* FOOTER */
-footer{border-top:0.5px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:var(--bg);}
-.footer-col{display:flex;flex-direction:column;gap:6px;}
-.footer-col-right{align-items:flex-end;}
-footer .logo{font-size:16px;}
+footer{border-top:0.5px solid var(--border);padding:3rem 2.5rem 2rem;background:var(--bg);}
+.footer-main{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:2rem;margin-bottom:2rem;}
+.footer-brand{display:flex;flex-direction:column;gap:6px;max-width:220px;}
+.footer-brand .logo{font-size:17px;margin-bottom:2px;}
+.footer-tagline{font-size:12px;color:var(--text3);line-height:1.6;}
+.footer-email{font-size:12px;color:var(--text3);text-decoration:none;transition:color 0.2s;margin-top:2px;}
+.footer-email:hover{color:var(--green);}
+.footer-nav{display:flex;flex-direction:column;gap:10px;}
+.footer-nav-title{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:2px;}
+.footer-links{display:flex;flex-direction:column;gap:8px;}
+.footer-links a{font-size:13px;color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--green);}
+.footer-social{display:flex;flex-direction:column;gap:10px;}
+.footer-social-title{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:2px;}
+.footer-social a{font-size:13px;color:var(--text2);text-decoration:none;transition:color 0.2s;display:flex;align-items:center;gap:6px;}
+.footer-social a:hover{color:var(--green);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:1.5rem;border-top:0.5px solid var(--border);}
+.footer-copy{font-size:12px;color:var(--text3);}
 footer span{font-size:12px;color:var(--text3);}
-.footer-email{font-size:12px;color:var(--text3);text-decoration:none;transition:color 0.2s;}
-.footer-email:hover{color:var(--text2);}
-.footer-links{display:flex;gap:1.5rem;}
-.footer-links a{font-size:12px;color:var(--text3);text-decoration:none;transition:color 0.2s;}
-.footer-links a:hover{color:var(--text2);}
 .disclaimer{width:100%;font-size:11px;color:rgba(240,237,232,0.35);line-height:1.8;padding-top:1rem;border-top:0.5px solid var(--border);}
 
 /* ── MOBILE ── */
@@ -213,9 +222,10 @@ footer span{font-size:12px;color:var(--text3);}
   .dir-header{padding:2rem 1.25rem 1.5rem;}
   .form-wrap,.signup-wrap{padding:2rem 1.25rem;}
   .plan-cards{grid-template-columns:1fr;}
-  footer{flex-direction:column;align-items:flex-start;gap:16px;padding:1.5rem 1.25rem;}
-  .footer-col-right{align-items:flex-start;}
-  .footer-links{flex-wrap:wrap;gap:1rem;}
+  footer{padding:2rem 1.25rem 1.5rem;}
+  .footer-main{flex-direction:column;gap:1.5rem;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
+  .footer-bottom span:last-child{text-align:left;}
   .email-row{flex-direction:column;}
   .email-row input,.email-row button{width:100%;}
   .form-group input,.form-group textarea,.form-group select,.search-bar input,.email-row input{font-size:16px;}
@@ -512,22 +522,32 @@ footer span{font-size:12px;color:var(--text3);}
 </div>
 
 <footer>
-  <div class="footer-col">
-    <div class="logo">Peptide<span>Radar</span></div>
-    <a href="mailto:peptideradar@gmail.com" class="footer-email">peptideradar@gmail.com</a>
-  </div>
-  <div class="footer-col footer-col-right">
-    <div class="footer-links">
-      <a href="#" onclick="showPage('landing');return false;">Home</a>
-      <a href="#" onclick="showPage('directory');return false;">Directory</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
-      <a href="#" onclick="showPage('verify');return false;">How we verify</a>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">Peptide<span>Radar</span></div>
+      <div class="footer-tagline">The trusted directory for verified peptide suppliers, filtered by country and peptide.</div>
+      <a href="mailto:peptideradar@gmail.com" class="footer-email">peptideradar@gmail.com</a>
     </div>
-    <span>© 2026 PeptideRadar</span>
+    <div class="footer-nav">
+      <div class="footer-nav-title">Navigate</div>
+      <div class="footer-links">
+        <a href="#" onclick="showPage('landing');return false;">Home</a>
+        <a href="#" onclick="showPage('directory');return false;">Directory</a>
+        <a href="#" onclick="showPage('verify');return false;">How We Verify</a>
+        <a href="#" onclick="showPage('contact');return false;">Contact</a>
+      </div>
+    </div>
+    <div class="footer-social">
+      <div class="footer-social-title">Follow</div>
+      <a href="https://twitter.com/PeptideRadar" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.213 5.567 5.951-5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        @PeptideRadar
+      </a>
+    </div>
   </div>
-  <div class="disclaimer">
-    <span>⚠ Disclaimer: PeptideRadar is an independent directory for informational purposes only. We do not sell, manufacture, or endorse any products. Nothing on this site constitutes medical advice — always consult a licensed healthcare professional before use.</span><br/>
-    <span>Laws and regulations regarding peptides vary by jurisdiction. Users are solely responsible for ensuring compliance with their local laws. By using this site, you acknowledge you have read and understood this disclaimer.</span>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 PeptideRadar</span>
+    <span style="font-size:11px;color:rgba(240,237,232,0.3);max-width:600px;text-align:right;line-height:1.7;">⚠ Independent directory for informational purposes only. Not medical advice. Peptide laws vary by jurisdiction — users are responsible for local compliance.</span>
   </div>
 </footer>
 

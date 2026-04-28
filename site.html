@@ -160,8 +160,8 @@ h1 em{font-style:normal;color:var(--green);}
 .tag{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:11px;padding:3px 10px;border-radius:6px;}
 .scard-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:0.5px solid var(--border);margin-top:auto;}
 .scard-meta{font-size:12px;color:var(--text3);}
-.visit-btn{background:var(--green);color:#0a0a0f;border:none;padding:7px 16px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.2s;}
-.visit-btn:hover{opacity:0.85;}
+.visit-btn{background:var(--green);color:#0a0a0f;border:0.5px solid var(--green);padding:8px 18px;border-radius:100px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;letter-spacing:0.1px;}
+.visit-btn:hover{opacity:0.85;transform:translateY(-1px);box-shadow:0 4px 12px rgba(78,207,122,0.25);}
 .no-results{text-align:center;padding:4rem 2rem;color:var(--text3);}
 .all-reviews::-webkit-scrollbar{width:4px;}
 .all-reviews::-webkit-scrollbar-track{background:transparent;}
@@ -261,7 +261,7 @@ footer span{font-size:12px;color:var(--text3);}
   .email-row{flex-direction:column;}
   .email-row input,.email-row button{width:100%;}
   .form-group input,.form-group textarea,.form-group select,.search-bar input,.email-row input,.cf-select{font-size:16px;}
-  .visit-btn{padding:10px 20px;font-size:13px;}
+  .visit-btn{padding:10px 20px;font-size:13px;font-weight:700;}
   .cf{padding:9px 16px;font-size:13px;}
   .back-to-top{width:44px;height:44px;font-size:16px;}
 }
@@ -705,7 +705,7 @@ function buildCard(s){
     h+='</div></div>';
   }
   var btns='<button class="visit-btn" onclick="trackClick(\''+s.name+'\',\''+s.url+'\')">'+(s.url2?'Telegram →':'Visit site →')+'</button>';
-  if(s.url2)btns+='<button class="visit-btn" style="background:transparent;border:0.5px solid var(--green);color:var(--green);margin-left:6px;" onclick="trackClick(\''+s.name+' WhatsApp\',\''+s.url2+'\')">WhatsApp →</button>';
+  if(s.url2)btns+='<button class="visit-btn" style="background:transparent;color:var(--green);" onclick="trackClick(\''+s.name+' WhatsApp\',\''+s.url2+'\')">WhatsApp →</button>';
   h+='<div class="scard-footer"><span class="scard-meta">Ships in '+s.shipping+'</span><div style="display:flex;gap:6px;">'+btns+'</div></div>';
   h+='</div>';
   return h;

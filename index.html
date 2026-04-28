@@ -620,7 +620,6 @@ function renderFilters(){
   const el = document.getElementById('country-filters');
   if(!suppliers.length){el.style.display='none';return;}
   const rest=allShipCountries.filter(c=>c!=='United States'&&c!=='Canada');
-  const isRestActive=rest.includes(activeCountry);
   const pinned=pinnedFilters.map(c=>{
     const label=c==='All'?'🌍 All':c==='Europe'?'<img src="https://flagcdn.com/16x12/eu.png" style="vertical-align:middle;border-radius:2px;margin-right:5px;" alt=""> Europe':flagEmoji(c)+c;
     return `<div class="cf ${c===activeCountry?'active':''}" data-country="${c}" onclick="setCountry('${c}')">${label}</div>`;

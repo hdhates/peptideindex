@@ -117,8 +117,8 @@ h1 em{font-style:normal;color:var(--green);}
 .country-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
 .cf{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:12px;padding:6px 14px;border-radius:100px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;}
 .cf:hover,.cf.active{background:var(--green-dim);border-color:rgba(126,232,162,0.4);color:var(--green);}
-.supplier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:0 2rem 4rem;max-width:1100px;margin:0 auto;align-items:start;}
-.scard{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.2s;}
+.supplier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:0 2rem 4rem;max-width:1100px;margin:0 auto;align-items:stretch;}
+.scard{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.2s;display:flex;flex-direction:column;}
 .scard:hover{border-color:rgba(126,232,162,0.35);background:var(--bg3);transform:translateY(-2px);}
 .scard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
 .scard-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;}
@@ -131,7 +131,7 @@ h1 em{font-style:normal;color:var(--green);}
 .rating-text{font-size:12px;color:var(--text3);margin-left:6px;}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
 .tag{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:11px;padding:3px 10px;border-radius:6px;}
-.scard-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:0.5px solid var(--border);}
+.scard-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:0.5px solid var(--border);margin-top:auto;}
 .scard-meta{font-size:12px;color:var(--text3);}
 .visit-btn{background:var(--green);color:#0a0a0f;border:none;padding:7px 16px;border-radius:100px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.2s;}
 .visit-btn:hover{opacity:0.85;}

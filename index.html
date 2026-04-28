@@ -10,7 +10,11 @@
 <meta property="og:description" content="Find verified, community-reviewed peptide suppliers in your country. No ads, no paid placements."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.thepeptideradar.com/"/>
-<meta name="twitter:card" content="summary"/>
+<meta property="og:image" content="https://www.thepeptideradar.com/og-image.svg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://www.thepeptideradar.com/og-image.svg"/>
 <meta name="twitter:site" content="@ThePeptideRadar"/>
 <meta name="twitter:creator" content="@ThePeptideRadar"/>
 <meta name="twitter:title" content="ThePeptideRadar — Find Trusted Peptide Suppliers by Country"/>
@@ -322,8 +326,8 @@ footer span{font-size:12px;color:var(--text3);}
   </div>
 
   <div class="cta-banner">
-    <h2>Get early access</h2>
-    <p>Join the waitlist — be first to know when new suppliers hit your country.</p>
+    <h2>New suppliers added weekly</h2>
+    <p>Join the list — be first to know when a new verified supplier hits your country.</p>
     <form id="waitlist-form" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
       <input type="hidden" name="subject" value="Waitlist signup"/>
       <div class="email-row">
@@ -612,7 +616,7 @@ function track(event, params){
 
 function trackClick(name, url){
   track('Clicked Supplier - Visit Site', {supplier_name: name, supplier_url: url});
-  window.open(url,'_blank');
+  window.open(url,'_blank','noopener,noreferrer');
 }
 
 function suggestSupplier(){
@@ -712,7 +716,8 @@ function renderGrid(){
   if(!filtered.length){
     var emptyTitle=searchTerm?'No results for "'+document.getElementById('search-input').value+'"':activeCountry!=='All'?'No suppliers ship to '+activeCountry+' yet':'No suppliers listed yet';
     var emptySub=searchTerm?'Try a different peptide name or supplier.':'Be the first to know when new suppliers are added.';
-    grid.innerHTML='<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text);">'+emptyTitle+'</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">'+emptySub+'</p><button class="btn-primary" onclick="showPage(\'landing\')" style="font-size:13px;padding:10px 22px;">Join the waitlist →</button></div>';
+    var emptyBtn=searchTerm?'':'<button class="btn-primary" onclick="showPage(\'landing\')" style="font-size:13px;padding:10px 22px;margin-top:0.5rem;">Join the waitlist →</button>';
+    grid.innerHTML='<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text);">'+emptyTitle+'</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">'+emptySub+'</p>'+emptyBtn+'</div>';
     return;
   }
   grid.innerHTML=filtered.map(buildCard).join('');
@@ -743,10 +748,13 @@ function filterSuppliers(){
   renderGrid();
 }
 
+var pageTitles={landing:'ThePeptideRadar — Find Trusted Peptide Suppliers by Country',directory:'Supplier Directory | ThePeptideRadar',contact:'Contact | ThePeptideRadar',signup:'List Your Business | ThePeptideRadar',verify:'How We Verify Suppliers | ThePeptideRadar'};
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+  document.title=pageTitles[id]||'ThePeptideRadar';
+  if(id!=='directory'){searchTerm='';var si=document.getElementById('search-input');if(si)si.value='';}
   document.querySelectorAll('.success-msg').forEach(function(el){el.style.display='none';});
   document.querySelectorAll('.nav-links a').forEach(function(a){
     var onclick=a.getAttribute('onclick')||'';

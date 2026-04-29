@@ -623,8 +623,8 @@ function track(event, params){
   if(typeof gtag==='function') gtag('event', event, params||{});
 }
 
-function trackClick(name, url){
-  track('Clicked Supplier - Visit Site', {supplier_name: name, supplier_url: url});
+function trackClick(name, url, eventName){
+  track(eventName||'supplier_visit', {supplier_name: name, supplier_url: url});
   window.open(url,'_blank','noopener,noreferrer');
 }
 
@@ -711,8 +711,8 @@ function buildCard(s){
     h+='</div></div>';
   }
   if(s.url2){
-    var btn1='<button class="visit-btn" style="flex:1;" onclick="trackClick(\''+s.name+'\',\''+s.url+'\')">Telegram →</button>';
-    var btn2='<button class="visit-btn visit-btn-ghost" style="flex:1;" onclick="trackClick(\''+s.name+' WhatsApp\',\''+s.url2+'\')">WhatsApp →</button>';
+    var btn1='<button class="visit-btn" style="flex:1;" onclick="trackClick(\''+s.name+'\',\''+s.url+'\',\'supplier_telegram\')">Telegram →</button>';
+    var btn2='<button class="visit-btn visit-btn-ghost" style="flex:1;" onclick="trackClick(\''+s.name+'\',\''+s.url2+'\',\'supplier_whatsapp\')">WhatsApp →</button>';
     h+='<div class="scard-footer" style="flex-direction:column;align-items:flex-start;gap:10px;"><span class="scard-meta">Ships in '+s.shipping+'</span><div style="display:flex;gap:8px;width:100%;">'+btn1+btn2+'</div></div>';
   } else {
     h+='<div class="scard-footer"><span class="scard-meta">Ships in '+s.shipping+'</span><button class="visit-btn" onclick="trackClick(\''+s.name+'\',\''+s.url+'\')">Visit site →</button></div>';

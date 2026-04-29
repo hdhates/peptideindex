@@ -663,7 +663,7 @@ function setCountry(c){
     sel.value=isRest?c:'';
     sel.classList.toggle('active',isRest);
   }
-  track('Filtered by Country',{country:c});
+  track('filter_by_country',{country:c});
   renderGrid();
 }
 
@@ -776,7 +776,7 @@ function showPage(id){
     var onclick=a.getAttribute('onclick')||'';
     a.classList.toggle('active',onclick.includes("'"+id+"'"));
   });
-  track('Navigated to Page', {page_name: id});
+  track('navigate_page', {page_name: id});
 }
 
 function toggleNav(){
@@ -806,7 +806,7 @@ document.getElementById('waitlist-form').addEventListener('submit',function(e){
   e.preventDefault();
   const btn=e.target.querySelector('button[type="submit"]');
   btn.textContent='Joining...';btn.disabled=true;
-  track('Joined Waitlist');
+  track('waitlist_join');
   fetch('https://formspree.io/f/xzdywbnw',{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}})
     .then(r=>{if(r.ok){e.target.reset();btn.textContent='Joined ✓';}else{btn.textContent='Join →';btn.disabled=false;}})
     .catch(function(){btn.textContent='Join →';btn.disabled=false;});
@@ -816,7 +816,7 @@ document.getElementById('contact-form').addEventListener('submit',function(e){
   e.preventDefault();
   const btn=e.target.querySelector('.submit-btn');
   btn.textContent='Sending...';btn.disabled=true;
-  track('Submitted Contact Form', {subject: e.target.querySelector('[name="subject"]').value});
+  track('contact_form_submit', {subject: e.target.querySelector('[name="subject"]').value});
   fetch('https://formspree.io/f/mrerdbrz',{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}})
     .then(r=>{
       if(r.ok){e.target.reset();document.getElementById('contact-success').style.display='block';}
@@ -828,7 +828,7 @@ document.getElementById('signup-form').addEventListener('submit',function(e){
   e.preventDefault();
   const btn=e.target.querySelector('.submit-btn');
   btn.textContent='Submitting...';btn.disabled=true;
-  track('Supplier Applied to List', {business_name: e.target.querySelector('[name="business_name"]').value, country: e.target.querySelector('[name="country"]').value});
+  track('supplier_apply', {business_name: e.target.querySelector('[name="business_name"]').value, country: e.target.querySelector('[name="country"]').value});
   fetch('https://formspree.io/f/xjgjzkjg',{method:'POST',body:new FormData(e.target),headers:{Accept:'application/json'}})
     .then(r=>{
       if(r.ok){e.target.reset();document.getElementById('signup-success').style.display='block';}

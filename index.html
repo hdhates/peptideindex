@@ -238,7 +238,7 @@ footer{
   c.style.height = SIZE + 'px';
   ctx.scale(dpr, dpr);
 
-  var cx = SIZE/2, cy = SIZE/2, R = 124;
+  var cx = SIZE/2, cy = SIZE/2, R = Math.floor(SIZE/2) - 16;
   var angle = -Math.PI / 2;
   var SPEED = (2 * Math.PI) / (3 * 60);
   var blips = [];

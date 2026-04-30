@@ -246,10 +246,11 @@ footer{
   function tick(){
     ctx.clearRect(0, 0, SIZE, SIZE);
 
-    var og = ctx.createRadialGradient(cx, cy, R * 0.8, cx, cy, R + 24);
+    var glowR = Math.min(R + 24, SIZE/2 - 2);
+    var og = ctx.createRadialGradient(cx, cy, R * 0.8, cx, cy, glowR);
     og.addColorStop(0, 'rgba(78,207,122,0.2)');
     og.addColorStop(1, 'rgba(78,207,122,0)');
-    ctx.beginPath(); ctx.arc(cx, cy, R + 24, 0, Math.PI * 2);
+    ctx.beginPath(); ctx.arc(cx, cy, glowR, 0, Math.PI * 2);
     ctx.fillStyle = og; ctx.fill();
 
     var bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, R);

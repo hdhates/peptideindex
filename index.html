@@ -221,8 +221,8 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 .form-group textarea{resize:vertical;min-height:120px;}
 .form-group select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(240%2C237%2C232%2C0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
 .form-group select option{background:var(--bg2);}
-.submit-btn{width:100%;background:var(--green);color:#0a0a0f;border:none;padding:14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:opacity 0.2s,transform 0.15s;margin-top:0.5rem;}
-.submit-btn:hover{opacity:0.88;transform:translateY(-1px);}
+.submit-btn{width:100%;background:linear-gradient(90deg,var(--green) 50%,#0a0a0f 50%);background-size:200% 100%;background-position:left center;color:#0a0a0f;border:0.5px solid var(--green);padding:14px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background-position 0.4s ease,color 0.3s,transform 0.15s,box-shadow 0.2s;margin-top:0.5rem;}
+.submit-btn:hover{background-position:right center;color:var(--green);transform:translateY(-1px);box-shadow:0 4px 14px rgba(78,207,122,0.35);}
 .success-msg{display:none;background:var(--green-dim);border:0.5px solid rgba(126,232,162,0.3);border-radius:10px;padding:1rem 1.25rem;color:var(--green);font-size:14px;margin-top:1rem;text-align:center;}
 
 /* ── SUPPLIER SIGNUP ── */

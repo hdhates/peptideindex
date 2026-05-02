@@ -455,7 +455,8 @@ footer span{font-size:12px;color:var(--text3);}
     <p>Browse peptide vendors by country, COA availability, and lab verification. <button onclick="suggestSupplier()" style="background:none;border:none;color:var(--green);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;text-decoration:underline;">+ Suggest a supplier</button></p>
     <div class="search-bar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,237,232,0.3)" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="Search by supplier or peptide..." id="search-input" oninput="filterSuppliers()"/>
+      <input type="text" placeholder="Search by supplier or peptide..." id="search-input" oninput="filterSuppliers();toggleSearchClear()"/>
+      <button id="search-clear" onclick="clearSearch()" aria-label="Clear search" style="display:none;background:rgba(255,255,255,0.06);border:none;color:var(--text2);width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;padding:0;display:none;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='var(--text)';" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text2)';">×</button>
     </div>
     <div class="country-filters" id="country-filters"></div>
   </div>
@@ -1171,6 +1172,16 @@ function fuzzyMatch(term,str){
 function filterSuppliers(){
   searchTerm = document.getElementById('search-input').value.toLowerCase();
   renderGrid();
+}
+function toggleSearchClear(){
+  var si=document.getElementById('search-input');
+  var clr=document.getElementById('search-clear');
+  if(!si||!clr)return;
+  clr.style.display=si.value?'flex':'none';
+}
+function clearSearch(){
+  var si=document.getElementById('search-input');
+  if(si){si.value='';searchTerm='';renderGrid();toggleSearchClear();si.focus();}
 }
 
 var pageTitles={landing:'ThePeptideRadar — Find Trusted Peptide Suppliers by Country',directory:'Supplier Directory | ThePeptideRadar',contact:'Contact | ThePeptideRadar',signup:'List Your Business | ThePeptideRadar',verify:'How We Verify Suppliers | ThePeptideRadar',privacy:'Privacy Policy | ThePeptideRadar',disclaimer:'Disclaimer | ThePeptideRadar'};

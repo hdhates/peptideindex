@@ -83,7 +83,17 @@ footer{margin-top:60px;border-top:0.5px solid var(--border);padding:3rem 2.5rem 
 .footer-copy{font-size:12px;color:var(--text3);}
 .footer-copy a{color:var(--text3);}
 .footer-copy a:hover{color:var(--green);}
-@media(max-width:640px){main{padding:32px 20px 60px;}.grid{grid-template-columns:1fr;}}
+
+.comparison-table{width:100%;border-collapse:collapse;margin-bottom:48px;background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;overflow:hidden;font-size:13px;}
+.comparison-table th{text-align:left;padding:14px 16px;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:0.6px;text-transform:uppercase;background:rgba(255,255,255,0.02);border-bottom:0.5px solid var(--border);}
+.comparison-table td{padding:14px 16px;color:var(--text2);border-bottom:0.5px solid var(--border);vertical-align:middle;}
+.comparison-table tr:last-child td{border-bottom:none;}
+.comparison-table tr:hover td{background:rgba(78,207,122,0.03);}
+.comparison-table .ct-supplier{font-weight:700;color:var(--text);}
+.comparison-table .ct-score{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:var(--green);}
+.comparison-table .ct-cta{color:var(--green);font-weight:700;text-decoration:none;}
+.comparison-table .ct-cta:hover{text-decoration:underline;}
+@media(max-width:640px){.comparison-table{display:block;overflow-x:auto;}.comparison-table th,.comparison-table td{padding:10px 12px;font-size:12px;white-space:nowrap;}}@media(max-width:640px){main{padding:32px 20px 60px;}.grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -108,6 +118,18 @@ footer{margin-top:60px;border-top:0.5px solid var(--border);padding:3rem 2.5rem 
     <p>TB-500 is a synthetic version of Thymosin Beta-4, a naturally occurring peptide present in nearly all human and animal cells. It is widely studied in research for its effects on tissue repair, recovery, inflammation, and angiogenesis in animal models.</p>
     <p>TB-500 is commonly researched alongside BPC-157 in healing protocols. Quality varies between suppliers, so third-party HPLC and mass spectrometry testing is essential.</p>
   </div>
+
+  <h2 class="section">TB-500 Supplier Comparison</h2>
+  <p class="section-sub" style="margin-top:-12px;margin-bottom:20px;color:var(--text3);font-size:14px;">All scored independently using our verification framework.</p>
+  <table class="comparison-table">
+    <thead><tr><th>Supplier</th><th>Score</th><th>Country</th><th>Lab Validators</th><th>Shipping</th><th></th></tr></thead>
+    <tbody>
+      <tr><td class="ct-supplier">Cernum Biosciences</td><td class="ct-score">9.4</td><td>🇺🇸 USA</td><td>Janoshik · COA Verified</td><td>USA: 3 days</td><td><a class="ct-cta" href="https://cernumbiosciences.com/" target="_blank" rel="noopener noreferrer">Visit →</a></td></tr>
+      <tr><td class="ct-supplier">Pure Peptides UK</td><td class="ct-score">9.4</td><td>🇬🇧 UK</td><td>COA Verified · Heavy Metals</td><td>UK: 1-2 days · Intl: 3-14 days</td><td><a class="ct-cta" href="https://purepeptidesuk.com/" target="_blank" rel="noopener noreferrer">Visit →</a></td></tr>
+      <tr><td class="ct-supplier">Peptide Centre</td><td class="ct-score">8.3</td><td>🇦🇺 Australia</td><td>Janoshik · COA Verified · 12 COAs</td><td>AU: 2 days · Intl: 3-7 days</td><td><a class="ct-cta" href="https://peptidecentre.com" target="_blank" rel="noopener noreferrer">Visit →</a></td></tr>
+      <tr><td class="ct-supplier">Uther</td><td class="ct-score">8.3</td><td>🇨🇳 China</td><td>Janoshik · Chromate</td><td>USA: 5-10 days · EU: 7-10 days</td><td><a class="ct-cta" href="https://t.me/+hMYZjdVCq2o5MDFh" target="_blank" rel="noopener noreferrer">Telegram →</a></td></tr>
+    </tbody>
+  </table>
 
   <h2 class="section">Verified TB-500 Suppliers</h2>
   <div class="grid">

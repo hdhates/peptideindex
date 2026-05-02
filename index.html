@@ -1005,6 +1005,13 @@ function calcTrustScoreData(s){
   return {score:score,parts:parts};
 }
 function calcTrustScore(s){return calcTrustScoreData(s).score;}
+function countValidators(s){
+  var tags=(s.tags||[]).map(function(t){return t.toLowerCase();});
+  var keys=['coa verified','janoshik','chromate','hplc','ms verified'];
+  var found=0;
+  keys.forEach(function(k){if(tags.some(function(t){return t.indexOf(k)>-1;}))found++;});
+  return found;
+}
 function toggleScoreBreakdown(el){var b=el.nextElementSibling;b.style.display=b.style.display==='none'?'block':'none';var t=el.querySelector('.score-toggle');if(t)t.textContent=b.style.display==='none'?'▾':'▴';}
 
 function buildCard(s){
@@ -1021,7 +1028,12 @@ function buildCard(s){
     h+='<div style="margin-bottom:14px;background:rgba(78,207,122,0.06);border:0.5px solid rgba(78,207,122,0.18);border-radius:8px;overflow:hidden;">';
     h+='<div onclick="event.stopPropagation();toggleScoreBreakdown(this);" style="display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;">';
     h+='<div style="font-family:\'Plus Jakarta Sans\',sans-serif;font-size:20px;font-weight:800;color:var(--green);line-height:1;min-width:38px;">'+scoreData.score.toFixed(1)+'</div>';
-    h+='<div style="flex:1;"><div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:0.4px;text-transform:uppercase;">Verification Score / 10</div><div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:1px;">Data-driven · click for breakdown</div></div>';
+    var validatorCount=countValidators(s);
+    var basisText='';
+    if(validatorCount>0&&s.coaCount){basisText='Based on '+validatorCount+' lab validator'+(validatorCount===1?'':'s')+' · '+s.coaCount+' COAs reviewed';}
+    else if(validatorCount>0){basisText='Based on '+validatorCount+' lab validator'+(validatorCount===1?'':'s')+' · click for breakdown';}
+    else{basisText='Data-driven · click for breakdown';}
+    h+='<div style="flex:1;"><div style="font-size:11px;font-weight:700;color:var(--text2);letter-spacing:0.4px;text-transform:uppercase;">Verification Score / 10</div><div style="font-size:10px;color:var(--text3);line-height:1.4;margin-top:1px;">'+basisText+'</div></div>';
     h+='<div class="score-toggle" style="color:var(--green);font-size:14px;line-height:1;">▾</div>';
     h+='</div>';
     h+='<div style="display:none;border-top:0.5px solid rgba(78,207,122,0.18);padding:10px 12px;background:rgba(78,207,122,0.02);">';

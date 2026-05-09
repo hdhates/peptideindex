@@ -440,7 +440,6 @@ html{scroll-padding-top:80px;}
         <p class="hero-sub">COAs, lab sources, shipping, and transparency signals — surfaced in one place. Filter by country, search by peptide.</p>
         <div class="cta-group">
           <button class="btn-primary" onclick="showPage('directory')">Explore directory →</button>
-          <button class="btn-ghost" onclick="document.querySelector('#guides-anchor-target').scrollIntoView({behavior:'smooth',block:'start'})">Browse guides</button>
           <a href="#" onclick="showPage('signup');return false;" class="cta-secondary-link">Are you a supplier? List your business →</a>
         </div>
       </div>
@@ -500,12 +499,6 @@ html{scroll-padding-top:80px;}
     </div>
   </div>
 
-  <div class="section" style="padding-top:0;">
-    <div class="section-tag">Browse Suppliers</div>
-    <div class="section-title">Start exploring</div>
-    <div id="top-suppliers" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:14px;margin-top:1.5rem;"></div>
-    <div style="text-align:center;margin-top:2rem;"><button class="btn-primary" onclick="showPage('directory')" style="font-size:13px;padding:10px 22px;">See all suppliers →</button></div>
-  </div>
 
   <div class="section" style="padding-top:0;">
     <div class="section-tag">Frequently asked</div>
@@ -1326,7 +1319,6 @@ function maybeShowConsentBanner(){
 renderFilters();
 renderGrid();
 updateStats();
-renderTopSuppliers();
 injectSupplierSchema();
 autoDetectCountry();
 maybeShowConsentBanner();

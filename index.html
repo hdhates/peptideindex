@@ -117,18 +117,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* ── LANDING ── */
 #landing{background:var(--bg);position:relative;}
-#landing::before{content:"";position:fixed;top:0;left:0;right:0;height:100vh;background-image:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(78,207,122,0.05),transparent 70%);pointer-events:none;z-index:-1;}
-.hero{position:relative;padding:6rem 3rem 3rem;max-width:1100px;margin:0 auto;overflow:hidden;}
-.hero::before{content:"";position:absolute;inset:-80px -40px 0 -40px;background-image:radial-gradient(ellipse at 18% 28%,rgba(78,207,122,0.14),transparent 42%),radial-gradient(ellipse at 84% 72%,rgba(78,207,122,0.07),transparent 48%);pointer-events:none;z-index:0;}
-.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(78,207,122,0.09) 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse 65% 60% at 50% 45%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse 65% 60% at 50% 45%,#000 30%,transparent 80%);pointer-events:none;z-index:0;opacity:0.7;}
+#landing::before{content:"";position:absolute;top:0;left:0;right:0;height:900px;background-image:radial-gradient(ellipse 70% 50% at 30% 25%,rgba(78,207,122,0.10),transparent 60%),radial-gradient(ellipse 60% 50% at 75% 35%,rgba(78,207,122,0.05),transparent 65%);pointer-events:none;z-index:0;}
+#landing > *{position:relative;z-index:1;}
+.hero{position:relative;padding:6rem 3rem 3rem;max-width:1100px;margin:0 auto;}
 .hero-layout{position:relative;z-index:1;display:grid;grid-template-columns:auto 1fr;gap:64px;align-items:center;margin-bottom:2.5rem;}
-.hero-radar-col{display:flex;justify-content:center;align-items:center;position:relative;padding:18px;}
-.hero-radar-col::before,.hero-radar-col::after{content:"";position:absolute;width:18px;height:18px;border:1px solid rgba(78,207,122,0.45);}
-.hero-radar-col::before{top:0;left:0;border-right:none;border-bottom:none;}
-.hero-radar-col::after{bottom:0;right:0;border-left:none;border-top:none;}
-.hero-radar-col .corner-tr,.hero-radar-col .corner-bl{position:absolute;width:18px;height:18px;border:1px solid rgba(78,207,122,0.45);}
-.hero-radar-col .corner-tr{top:0;right:0;border-left:none;border-bottom:none;}
-.hero-radar-col .corner-bl{bottom:0;left:0;border-right:none;border-top:none;}
+.hero-radar-col{display:flex;justify-content:center;align-items:center;position:relative;}
 .hero-content-col{text-align:left;position:relative;}
 #hero-radar{display:block;}
 .live-pill{display:inline-flex;align-items:center;gap:9px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--text2);border:0.5px solid var(--border2);background:rgba(255,255,255,0.025);padding:7px 14px;border-radius:100px;margin-bottom:1.75rem;backdrop-filter:blur(6px);}
@@ -428,8 +421,6 @@ html{scroll-padding-top:80px;}
   <div class="hero">
     <div class="hero-layout">
       <div class="hero-radar-col">
-        <span class="corner-tr" aria-hidden="true"></span>
-        <span class="corner-bl" aria-hidden="true"></span>
         <canvas id="hero-radar"></canvas>
       </div>
       <div class="hero-content-col">
@@ -1254,12 +1245,8 @@ function toggleReviews(btn){
 function renderTopSuppliers(){
   var grid=document.getElementById('top-suppliers');
   if(!grid)return;
-  var pool=suppliers.filter(function(s){return s.verified&&!s.warning;});
-  for(var i=pool.length-1;i>0;i--){
-    var j=Math.floor(Math.random()*(i+1));
-    var t=pool[i];pool[i]=pool[j];pool[j]=t;
-  }
-  var top=pool.slice(0,3);
+  var top=suppliers.filter(function(s){return s.verified&&!s.warning;})
+    .sort(function(a,b){return a.country.localeCompare(b.country);});
   grid.innerHTML=top.map(function(s){
     var reviews=s.reviews>0?'<div class="bcard-reviews">★ '+s.rating+' · '+s.reviews+' review'+(s.reviews===1?'':'s')+'</div>':'<div class="bcard-reviews">No reviews yet</div>';
     return '<a href="#" class="bcard" onclick="showPage(\'directory\');setTimeout(function(){var s=document.getElementById(\'search-input\');if(s){s.value=\''+s.name.replace(/'/g,"\\'")+'\';s.dispatchEvent(new Event(\'input\'));}},100);return false;">'+

@@ -85,7 +85,7 @@
   --border2:rgba(255,255,255,0.14);
 }
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-text-size-adjust:100%;}
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:4px;}
@@ -96,7 +96,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);lin
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(10,10,15,0.9);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);}
 .logo{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:28px;letter-spacing:-1px;cursor:pointer;}
 .logo span{color:var(--green);}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
 .nav-links a{color:var(--text2);text-decoration:none;font-size:15px;font-weight:500;transition:color 0.2s;}
 .nav-links a:hover{color:var(--text);}
 .nav-links a.active{color:var(--green);}
@@ -233,7 +233,7 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .cf-select option{background:#111118;color:#f0ede8;}
 @media(max-width:640px){.cf-rest{display:none;}.cf-select{display:inline-block;}}
 .supplier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:0 2rem 4rem;max-width:1100px;margin:0 auto;align-items:stretch;}
-.scard{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.2s;display:flex;flex-direction:column;}
+.scard{background:var(--bg2);border:0.5px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.2s;display:flex;flex-direction:column;min-width:0;word-wrap:break-word;overflow-wrap:break-word;}
 .scard-featured{border:0.5px solid rgba(255,193,7,0.35);background:linear-gradient(180deg,rgba(255,193,7,0.04),var(--bg2) 30%);box-shadow:0 0 0 0 rgba(255,193,7,0.1);}
 @media(hover:hover){.scard:hover{border-color:rgba(126,232,162,0.35);background:var(--bg3);transform:translateY(-2px);}}
 .scard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
@@ -248,7 +248,7 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
 .tag{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:11px;padding:3px 10px;border-radius:6px;}
 .scard-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:0.5px solid var(--border);margin-top:auto;}
-.scard-meta{font-size:12px;color:var(--text3);}
+.scard-meta{font-size:12px;color:var(--text3);word-break:break-word;}
 .visit-btn{background:linear-gradient(90deg,var(--green) 50%,#0a0a0f 50%);background-size:200% 100%;background-position:left center;color:#0a0a0f;border:0.5px solid var(--green);padding:11px 22px;border-radius:100px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background-position 0.4s ease,color 0.3s,transform 0.15s,box-shadow 0.2s;letter-spacing:0.1px;}
 .visit-btn-ghost{background:linear-gradient(90deg,transparent 50%,var(--green) 50%);background-size:200% 100%;background-position:left center;color:var(--green);}
 @media(hover:hover){.visit-btn:hover{background-position:right center;color:var(--green);transform:translateY(-1px);box-shadow:0 4px 14px rgba(78,207,122,0.35);}.visit-btn-ghost:hover{background-position:right center;color:#0a0a0f;}}
@@ -345,26 +345,27 @@ footer span{font-size:12px;color:var(--text3);}
   .nav-cta{display:none;}
   .nav-links{display:none;flex-direction:column;width:100%;gap:0;padding:0.5rem 0;}
   .nav-links.open{display:flex;}
-  .nav-links a{font-size:14px;padding:0.6rem 0;border-bottom:0.5px solid var(--border);}
+  .nav-links a{font-size:15px;padding:0.85rem 0.25rem;border-bottom:0.5px solid var(--border);}
   .nav-cta-mobile{display:block;}
   .nav-cta-mobile a{color:var(--green) !important;}
-  .hero{padding:3.5rem 1.25rem 2.5rem;}
+  .hero{padding:2.5rem 1.25rem 2rem;}
   .hero-layout{grid-template-columns:1fr;gap:0;margin-bottom:1.5rem;}
-  .hero-radar-col{margin-bottom:24px;padding:14px;}
+  .hero-radar-col{margin-bottom:18px;padding:0;}
   .hero-content-col{text-align:left;}
-  .live-pill{font-size:10px;letter-spacing:1.2px;padding:6px 12px;}
-  .cta-group{flex-direction:column;align-items:stretch;width:100%;gap:10px;}
+  .live-pill{font-size:10px;letter-spacing:1.1px;padding:6px 11px;margin-bottom:1.25rem;}
+  .cta-group{flex-direction:column;align-items:stretch;width:100%;gap:10px;margin-bottom:2rem;}
   .btn-primary,.btn-ghost{width:100%;text-align:center;}
   .cta-secondary-link{text-align:center;}
   .stats-row{grid-template-columns:1fr;}
   .stat-item{border-right:none;border-bottom:0.5px solid var(--border);padding:1.1rem 1.4rem;}
   .stat-item:last-child{border-bottom:none;}
   .stat-num{font-size:24px;}
-  h1{font-size:clamp(30px,8vw,42px);letter-spacing:-1px;line-height:1.05;}
-  .hero-sub{font-size:15px;}
-  .section{padding:1.5rem 1.25rem;}
+  h1{font-size:clamp(30px,8vw,42px);letter-spacing:-1px;line-height:1.05;margin-bottom:1rem;}
+  .hero-sub{font-size:15px;margin-bottom:1.75rem;}
+  .section{padding:2rem 1.25rem 1.5rem;scroll-margin-top:70px;}
+  .section-title{margin-bottom:1.5rem;}
   .steps{grid-template-columns:1fr;}
-  .features-grid{grid-template-columns:1fr;}
+  .features-grid{grid-template-columns:1fr !important;}
   .supplier-grid{grid-template-columns:1fr;padding:0 1.25rem 3rem;}
   .dir-header{padding:2rem 1.25rem 1.5rem;}
   .form-wrap,.signup-wrap{padding:2rem 1.25rem;}
@@ -378,8 +379,18 @@ footer span{font-size:12px;color:var(--text3);}
   .form-group input,.form-group textarea,.form-group select,.search-bar input,.email-row input,.cf-select{font-size:16px;}
   .visit-btn{padding:13px 24px;font-size:15px;font-weight:700;}
   .cf{padding:9px 16px;font-size:13px;}
-  .back-to-top{width:44px;height:44px;font-size:16px;}
-  .dir-header h2,.form-wrap h2,.signup-wrap h2{font-size:24px;letter-spacing:-0.5px;}
+  .back-to-top{width:44px;height:44px;font-size:16px;bottom:calc(1.5rem + env(safe-area-inset-bottom,0));}
+  .dir-header h2,.form-wrap h2,.signup-wrap h2{font-size:26px;letter-spacing:-0.5px;}
+  .scard{padding:1.25rem;}
+  .scard-top{flex-wrap:wrap;gap:8px;}
+  .faq-item summary{font-size:15px;}
+  .faq-item{padding:16px 18px;}
+  .scard-footer .visit-btn,.scard-footer button.visit-btn{font-size:14px;padding:12px 18px;}
+  .scard-footer > div[style*="display:flex"]{flex-direction:column;gap:8px !important;}
+  #top-suppliers,#guides-anchor-target > div[style*="grid"]{grid-template-columns:1fr !important;}
+  #consent-banner > div{flex-direction:column;align-items:stretch;gap:0.75rem;}
+  #consent-banner > div > div:last-child{display:grid !important;grid-template-columns:1fr 1fr;}
+  .verify-body{padding-left:0 !important;}
 }
 
 /* UX: keyboard focus rings (only show on keyboard nav, not click) */
@@ -436,8 +447,8 @@ html{scroll-padding-top:80px;}
     </div>
     <div class="stats-row">
       <div class="stat-item"><div class="stat-num" id="stat-suppliers">—</div><div class="stat-label">Suppliers listed</div></div>
-      <div class="stat-item"><div class="stat-num" id="stat-countries">35+</div><div class="stat-label">Countries served</div></div>
-      <div class="stat-item"><div class="stat-num">10<em>+</em></div><div class="stat-label">Peptide guides</div></div>
+      <div class="stat-item"><div class="stat-num" id="stat-countries">—</div><div class="stat-label">Countries served</div></div>
+      <div class="stat-item"><div class="stat-num">16<em>+</em></div><div class="stat-label">Peptide guides</div></div>
     </div>
   </div>
 
@@ -468,7 +479,7 @@ html{scroll-padding-top:80px;}
   <div class="section" id="guides-anchor-target">
     <div class="section-tag">Buyer's Guides</div>
     <div class="section-title">Looking for a specific peptide?</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:1.5rem;">
+    <div class="guides-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:12px;margin-top:1.5rem;">
       <a href="/peptides/bpc-157.html" class="gcard"><div class="gcard-head"><div class="gcard-title">BPC-157</div><span class="gcard-arrow">→</span></div><div class="gcard-meta">5 suppliers</div><div class="gcard-desc">Tissue repair & gut health research peptide.</div></a>
       <a href="/peptides/tb-500.html" class="gcard"><div class="gcard-head"><div class="gcard-title">TB-500</div><span class="gcard-arrow">→</span></div><div class="gcard-meta">3 suppliers</div><div class="gcard-desc">Thymosin Beta-4 fragment for tissue repair.</div></a>
       <a href="/peptides/ghk-cu.html" class="gcard"><div class="gcard-head"><div class="gcard-title">GHK-Cu</div><span class="gcard-arrow">→</span></div><div class="gcard-meta">4 suppliers</div><div class="gcard-desc">Copper peptide for skin & wound healing research.</div></a>
@@ -514,7 +525,7 @@ html{scroll-padding-top:80px;}
   <div class="section" style="padding-top:0;">
     <div class="section-tag">Browse Suppliers</div>
     <div class="section-title">Start exploring</div>
-    <div id="top-suppliers" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:1.5rem;"></div>
+    <div id="top-suppliers" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr));gap:14px;margin-top:1.5rem;"></div>
     <div style="text-align:center;margin-top:2rem;"><button class="btn-primary" onclick="showPage('directory')" style="font-size:13px;padding:10px 22px;">See all suppliers →</button></div>
   </div>
 
@@ -716,7 +727,7 @@ html{scroll-padding-top:80px;}
             <div style="font-size:13px;color:var(--text3);">"Lab tested" means nothing if the lab is fake.</div>
           </div>
         </div>
-        <div style="font-size:14px;color:var(--text2);line-height:1.75;padding-left:52px;">
+        <div class="verify-body" style="font-size:14px;color:var(--text2);line-height:1.75;padding-left:52px;">
           <p style="margin-bottom:10px;"><strong style="color:var(--text);">What we look for:</strong> COAs from independent third-party labs we can verify exist and operate legitimately — Janoshik, Chromate, and licensed HPLC/MS facilities with public records.</p>
           <p style="margin-bottom:10px;"><strong style="color:var(--text);">Major red flags:</strong> Made-up lab names. Supplier-affiliated labs reviewing their own products. Labs with no public registration. PDFs that don't match the issuing lab's actual format.</p>
           <p><strong style="color:var(--text);">Why it matters:</strong> The cheapest peptide-fraud trick is inventing a lab name and producing a clean-looking COA in Photoshop. We check.</p>
@@ -731,7 +742,7 @@ html{scroll-padding-top:80px;}
             <div style="font-size:13px;color:var(--text3);">Reusing one good COA across many batches is the oldest trick.</div>
           </div>
         </div>
-        <div style="font-size:14px;color:var(--text2);line-height:1.75;padding-left:52px;">
+        <div class="verify-body" style="font-size:14px;color:var(--text2);line-height:1.75;padding-left:52px;">
           <p style="margin-bottom:10px;"><strong style="color:var(--text);">What we pull:</strong> Minimum 2-3 COAs per supplier across different batches and time periods. Real labs produce slightly different numbers each batch — that's how chemistry works.</p>
           <p style="margin-bottom:10px;"><strong style="color:var(--text);">Red flags:</strong> Identical purity numbers across batches. Identical impurity profiles. Same test date on multiple batch certificates. Suspiciously round numbers (99.99% on every test).</p>
           <p><strong style="color:var(--text);">Why it matters:</strong> A supplier with one good COA proves nothing. A supplier whose data varies realistically across batches proves they're actually testing.</p>
@@ -746,7 +757,7 @@ html{scroll-padding-top:80px;}
             <div style="font-size:13px;color:var(--text3);">If they won't show you the data, there's a reason.</div>
           </div>
         </div>
-        <div style="font-size:14px;color:var(--text2);line-height:1.75;padding-left:52px;">
+        <div class="verify-body" style="font-size:14px;color:var(--text2);line-height:1.75;padding-left:52px;">
           <p style="margin-bottom:10px;"><strong style="color:var(--text);">What's required:</strong> Publicly accessible COAs, batch numbers on certificates, named testing methodology (HPLC, MS, etc.), and clear identification of the issuing lab.</p>
           <p style="margin-bottom:10px;"><strong style="color:var(--text);">Disqualifying behaviors:</strong> Refusing to share batch-level COAs. Removing batch numbers from certificates. Claiming "lab tested" without naming the lab. Showing inconsistent results between submitted documents.</p>
           <p><strong style="color:var(--text);">Status outcome:</strong> Suppliers with incomplete information are marked <em>Data Pending</em> or shown with limited-data signals until stronger documentation is available.</p>
@@ -782,7 +793,7 @@ html{scroll-padding-top:80px;}
 
 <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<div id="consent-banner" style="position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:0.5px solid var(--border2);padding:1rem 1.5rem;z-index:1000;display:none;backdrop-filter:blur(12px);">
+<div id="consent-banner" style="position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:0.5px solid var(--border2);padding:1rem 1.5rem calc(1rem + env(safe-area-inset-bottom,0));z-index:1000;display:none;backdrop-filter:blur(12px);">
   <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
     <div style="font-size:13px;color:var(--text2);flex:1;min-width:240px;line-height:1.5;">
       We use Google Analytics to understand how visitors use the site. No personal data is sold or shared. <a href="/privacy.html" style="color:var(--green);text-decoration:none;">Privacy policy</a>
@@ -844,7 +855,7 @@ html{scroll-padding-top:80px;}
   if(!c) return;
   var ctx = c.getContext('2d');
   if(!ctx) return;
-  var SIZE = window.innerWidth <= 640 ? 180 : 220;
+  var SIZE = window.innerWidth <= 640 ? 160 : 220;
   var dpr = window.devicePixelRatio || 1;
   c.width = SIZE * dpr; c.height = SIZE * dpr;
   c.style.width = SIZE + 'px'; c.style.height = SIZE + 'px';

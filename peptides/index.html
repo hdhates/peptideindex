@@ -53,7 +53,7 @@ h1 em{font-style:normal;color:var(--green);}
 .section-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px;}
 .section-tag{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text3);font-weight:700;}
 .section-count{font-size:13px;color:var(--text3);}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px;}
 .pcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:14px;padding:24px;transition:transform 0.2s ease,border-color 0.2s ease,box-shadow 0.2s ease;display:block;position:relative;overflow:hidden;}
 .pcard::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 0%, rgba(78,207,122,0.08), transparent 50%);opacity:0;transition:opacity 0.3s ease;pointer-events:none;}
 .pcard:hover{transform:translateY(-3px);border-color:rgba(78,207,122,0.4);box-shadow:0 8px 24px rgba(0,0,0,0.3);}
@@ -85,12 +85,20 @@ footer{margin-top:auto;border-top:0.5px solid var(--border);padding:3rem 2.5rem 
 
 @media(max-width:640px){
   nav{padding:0.85rem 1.25rem;}
-  .nav-links{gap:1.25rem;}
+  .nav-links{gap:1rem;}
   .nav-links a{font-size:13px;}
-  .hero{padding:48px 1.5rem 40px;}
-  .guides-section{padding:0 1.5rem 60px;}
+  .hero{padding:40px 1.25rem 32px;}
+  h1{font-size:clamp(32px,8vw,44px);letter-spacing:-1px;line-height:1.05;}
+  .lead{font-size:15px;line-height:1.6;}
+  .guides-section{padding:0 1.25rem 48px;}
   .grid{grid-template-columns:1fr;}
-  footer{padding:2rem 1.5rem 1.5rem;}
+  .pcard{padding:18px 20px;}
+  .pcard h2{font-size:20px;}
+  .pcard .desc{font-size:13.5px;}
+  .section-header{flex-direction:column;align-items:flex-start;gap:6px;}
+  footer{padding:2rem 1.25rem 1.5rem;}
+  .footer-main{flex-direction:column;gap:1.5rem;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
 }
 
 /* UX: keyboard focus rings */
@@ -119,7 +127,7 @@ html{scroll-padding-top:80px;}
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="crumb"><a href="/">Home</a> / Peptides</div>
-    <div class="badge">10+ Guides Available</div>
+    <div class="badge">16+ Guides Available</div>
     <h1>Peptide <em>Buyer's Guides</em></h1>
     <p class="lead">In-depth buyer's guides for the most popular research peptides. Each guide surfaces lab data, third-party COAs, and shipping details so you can compare suppliers with more context. No paid placements.</p>
   </div>
@@ -128,7 +136,7 @@ html{scroll-padding-top:80px;}
 <section class="guides-section">
   <div class="section-header">
     <div class="section-tag">All Guides</div>
-    <div class="section-count">10+ peptides · trusted suppliers</div>
+    <div class="section-count">16+ peptides · trusted suppliers</div>
   </div>
   <div class="grid">
     <a class="pcard" href="/peptides/bpc-157.html">

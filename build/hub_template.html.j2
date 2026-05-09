@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Peptide Buyer's Guides | ThePeptideRadar</title>
 <meta name="description" content="Buyer's guides for popular research peptides — BPC-157, TB-500, Retatrutide, GHK-Cu, MOTS-c, Sermorelin, and more. COAs and lab data."/>
-<meta name="keywords" content="peptide guides, peptide buyer guide, where to buy peptides, peptide suppliers by peptide, BPC-157, TB-500, GHK-Cu, Retatrutide, Tirzepatide, Semaglutide, Melanotan II, CJC-1295 / Ipamorelin, MOTS-c, Sermorelin, Selank, PT-141, NAD+, IGF-1 LR3, AOD-9604, Tesamorelin"/>
+<meta name="keywords" content="peptide guides, peptide buyer guide, where to buy peptides, peptide suppliers by peptide, {{ peptide_names }}"/>
 <link rel="canonical" href="https://thepeptideradar.com/peptides/"/>
 <meta property="og:title" content="Peptide Buyer's Guides — Where to Buy Each Peptide"/>
 <meta property="og:description" content="Browse buyer's guides for popular research peptides. Trusted suppliers only."/>
@@ -123,86 +123,13 @@ footer{margin-top:auto;border-top:0.5px solid var(--border);padding:3rem 2.5rem 
     <div class="section-count">10+ peptides · trusted suppliers</div>
   </div>
   <div class="grid">
-    <a class="pcard" href="/peptides/bpc-157.html">
-      <div class="pcard-header"><h2>BPC-157</h2><span class="arrow">→</span></div>
-      <div class="count">5 suppliers</div>
-      <div class="desc">Body Protection Compound 157 — widely studied for tissue repair, gut health, and tendon healing.</div>
+    {%- for slug, p in peptides %}
+    <a class="pcard" href="/peptides/{{ slug }}.html">
+      <div class="pcard-header"><h2>{{ p.name }}</h2><span class="arrow">→</span></div>
+      <div class="count">{{ p.suppliers | length }} supplier{% if p.suppliers | length != 1 %}s{% endif %}</div>
+      <div class="desc">{{ p.hub_blurb }}</div>
     </a>
-    <a class="pcard" href="/peptides/tb-500.html">
-      <div class="pcard-header"><h2>TB-500</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">Thymosin Beta-4 fragment — researched for tissue repair, often paired with BPC-157.</div>
-    </a>
-    <a class="pcard" href="/peptides/ghk-cu.html">
-      <div class="pcard-header"><h2>GHK-Cu</h2><span class="arrow">→</span></div>
-      <div class="count">4 suppliers</div>
-      <div class="desc">Copper-binding tripeptide — researched for skin remodeling, wound healing, and antioxidant effects.</div>
-    </a>
-    <a class="pcard" href="/peptides/retatrutide.html">
-      <div class="pcard-header"><h2>Retatrutide</h2><span class="arrow">→</span></div>
-      <div class="count">4 suppliers</div>
-      <div class="desc">Investigational triple agonist (GLP-1, GIP, glucagon) — studied for metabolic effects.</div>
-    </a>
-    <a class="pcard" href="/peptides/tirzepatide.html">
-      <div class="pcard-header"><h2>Tirzepatide</h2><span class="arrow">→</span></div>
-      <div class="count">1 supplier</div>
-      <div class="desc">Dual GIP and GLP-1 receptor agonist — widely studied for metabolic effects.</div>
-    </a>
-    <a class="pcard" href="/peptides/semaglutide.html">
-      <div class="pcard-header"><h2>Semaglutide</h2><span class="arrow">→</span></div>
-      <div class="count">1 supplier</div>
-      <div class="desc">GLP-1 receptor agonist — research-grade peptide for laboratory study.</div>
-    </a>
-    <a class="pcard" href="/peptides/melanotan-ii.html">
-      <div class="pcard-header"><h2>Melanotan II</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">Synthetic alpha-MSH analog — researched for melanogenesis effects.</div>
-    </a>
-    <a class="pcard" href="/peptides/cjc-1295-ipamorelin.html">
-      <div class="pcard-header"><h2>CJC-1295 / Ipamorelin</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">GHRH analog and GH secretagogue blend — popular synergistic GH-axis research pair.</div>
-    </a>
-    <a class="pcard" href="/peptides/mots-c.html">
-      <div class="pcard-header"><h2>MOTS-c</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">Mitochondrial-derived peptide — researched for metabolic regulation, insulin sensitivity, and exercise adaptations.</div>
-    </a>
-    <a class="pcard" href="/peptides/sermorelin.html">
-      <div class="pcard-header"><h2>Sermorelin</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">29-aa GHRH analog — studied for endogenous growth hormone release via the pituitary.</div>
-    </a>
-    <a class="pcard" href="/peptides/selank.html">
-      <div class="pcard-header"><h2>Selank</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">Synthetic heptapeptide — researched for anxiolytic-like effects, immune modulation, and cognitive endpoints.</div>
-    </a>
-    <a class="pcard" href="/peptides/pt-141.html">
-      <div class="pcard-header"><h2>PT-141</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">Bremelanotide — melanocortin MC4R agonist studied for sexual response and CNS-mediated endpoints.</div>
-    </a>
-    <a class="pcard" href="/peptides/nad.html">
-      <div class="pcard-header"><h2>NAD+</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">Coenzyme central to redox reactions — researched for mitochondrial function and aging pathways.</div>
-    </a>
-    <a class="pcard" href="/peptides/igf-1-lr3.html">
-      <div class="pcard-header"><h2>IGF-1 LR3</h2><span class="arrow">→</span></div>
-      <div class="count">4 suppliers</div>
-      <div class="desc">Long R3 IGF-1 analog — extended half-life version of IGF-1 with reduced IGFBP binding.</div>
-    </a>
-    <a class="pcard" href="/peptides/aod-9604.html">
-      <div class="pcard-header"><h2>AOD-9604</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">Modified hGH 176-191 fragment — studied for lipolysis and adipose tissue regulation.</div>
-    </a>
-    <a class="pcard" href="/peptides/tesamorelin.html">
-      <div class="pcard-header"><h2>Tesamorelin</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">44-aa modified GHRH analog — researched for endogenous GH secretion and visceral adipose tissue.</div>
-    </a>
+    {%- endfor %}
   </div>
 </section>
 

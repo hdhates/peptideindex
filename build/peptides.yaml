@@ -4,6 +4,7 @@
 
 bpc-157:
   name: "BPC-157"
+  hub_blurb: "Body Protection Compound 157 — widely studied for tissue repair, gut health, and tendon healing."
   seo_title: "Where to Buy BPC-157 | Trusted Suppliers | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling BPC-157. Lab tested with third-party COAs, country-filtered. Independent reviews, no paid placements."
   seo_keywords: "BPC-157, BPC 157, buy BPC-157, BPC-157 supplier, BPC-157 source, BPC-157 peptide, where to buy BPC-157, BPC-157 review"
@@ -31,6 +32,7 @@ bpc-157:
 
 tb-500:
   name: "TB-500"
+  hub_blurb: "Thymosin Beta-4 fragment — researched for tissue repair, often paired with BPC-157."
   seo_title: "Where to Buy TB-500 | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling TB-500 (Thymosin Beta-4). Lab data, COAs, and shipping details. No paid placements."
   seo_keywords: "TB-500, Thymosin Beta-4, buy TB-500, TB-500 supplier, where to buy TB-500, TB-500 review"
@@ -56,6 +58,7 @@ tb-500:
 
 ghk-cu:
   name: "GHK-Cu"
+  hub_blurb: "Copper-binding tripeptide — researched for skin remodeling, wound healing, and antioxidant effects."
   seo_title: "Where to Buy GHK-Cu | Copper Peptide | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling GHK-Cu (copper peptide). Lab data, COAs, and shipping details. No paid placements."
   seo_keywords: "GHK-Cu, copper peptide, buy GHK-Cu, GHK-Cu supplier, where to buy GHK-Cu, GHK-Cu review"
@@ -76,6 +79,7 @@ ghk-cu:
 
 retatrutide:
   name: "Retatrutide"
+  hub_blurb: "Investigational triple agonist (GLP-1, GIP, glucagon) — studied for metabolic effects."
   seo_title: "Where to Buy Retatrutide | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling Retatrutide. Lab data, COAs, and shipping details. No paid placements."
   seo_keywords: "Retatrutide, buy Retatrutide, Retatrutide supplier, where to buy Retatrutide, Retatrutide review, GLP-1 GIP glucagon"
@@ -96,6 +100,7 @@ retatrutide:
 
 tirzepatide:
   name: "Tirzepatide"
+  hub_blurb: "Dual GIP and GLP-1 receptor agonist — widely studied for metabolic effects."
   seo_title: "Where to Buy Tirzepatide | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling Tirzepatide. Lab data, COAs, and shipping details. No paid placements."
   seo_keywords: "Tirzepatide, buy Tirzepatide, Tirzepatide supplier, where to buy Tirzepatide, Tirzepatide review, GIP GLP-1"
@@ -116,6 +121,7 @@ tirzepatide:
 
 semaglutide:
   name: "Semaglutide"
+  hub_blurb: "GLP-1 receptor agonist — research-grade peptide for laboratory study."
   seo_title: "Where to Buy Semaglutide | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling Semaglutide. Lab data, COAs, and shipping details. No paid placements."
   seo_keywords: "Semaglutide, buy Semaglutide, Semaglutide supplier, where to buy Semaglutide, Semaglutide review, GLP-1"
@@ -136,6 +142,7 @@ semaglutide:
 
 melanotan-ii:
   name: "Melanotan II"
+  hub_blurb: "Synthetic alpha-MSH analog — researched for melanogenesis effects."
   seo_title: "Where to Buy Melanotan II | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling Melanotan II (MT-2). Lab data, COAs, and shipping details. No paid placements."
   seo_keywords: "Melanotan II, MT-2, buy Melanotan II, Melanotan II supplier, where to buy Melanotan II, Melanotan II review"
@@ -156,6 +163,7 @@ melanotan-ii:
 
 cjc-1295-ipamorelin:
   name: "CJC-1295 / Ipamorelin"
+  hub_blurb: "GHRH analog and GH secretagogue blend — popular synergistic GH-axis research pair."
   seo_title: "Where to Buy CJC-1295 / Ipamorelin | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling the CJC-1295 / Ipamorelin blend. Lab data, COAs, and shipping details. No paid placements."
   seo_keywords: "CJC-1295, Ipamorelin, CJC-1295 Ipamorelin blend, buy CJC-1295, where to buy Ipamorelin, GHRH analog, GH secretagogue"
@@ -176,6 +184,7 @@ cjc-1295-ipamorelin:
 
 mots-c:
   name: "MOTS-c"
+  hub_blurb: "Mitochondrial-derived peptide — researched for metabolic regulation, insulin sensitivity, and exercise adaptations."
   seo_title: "Where to Buy MOTS-c | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling MOTS-c with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "MOTS-c, MOTS c, buy MOTS-c, MOTS-c supplier, where to buy MOTS-c, mitochondrial peptide, MOTS-c review"
@@ -205,6 +214,7 @@ mots-c:
 
 sermorelin:
   name: "Sermorelin"
+  hub_blurb: "29-aa GHRH analog — studied for endogenous growth hormone release via the pituitary."
   seo_title: "Where to Buy Sermorelin | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling Sermorelin with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "Sermorelin, buy Sermorelin, Sermorelin supplier, Sermorelin source, Sermorelin peptide, where to buy Sermorelin, Sermorelin review, GHRH analog"
@@ -239,6 +249,7 @@ sermorelin:
 
 selank:
   name: "Selank"
+  hub_blurb: "Synthetic heptapeptide — researched for anxiolytic-like effects, immune modulation, and cognitive endpoints."
   seo_title: "Where to Buy Selank | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling Selank with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "Selank, buy Selank, Selank supplier, Selank source, where to buy Selank, Selank peptide, Russian peptide, Selank review"
@@ -268,6 +279,7 @@ selank:
 
 pt-141:
   name: "PT-141"
+  hub_blurb: "Bremelanotide — melanocortin MC4R agonist studied for sexual response and CNS-mediated endpoints."
   seo_title: "Where to Buy PT-141 (Bremelanotide) | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling PT-141 (Bremelanotide) with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "PT-141, Bremelanotide, buy PT-141, PT-141 supplier, PT-141 source, where to buy PT-141, Bremelanotide peptide, PT 141, PT-141 review"
@@ -302,6 +314,7 @@ pt-141:
 
 nad:
   name: "NAD+"
+  hub_blurb: "Coenzyme central to redox reactions — researched for mitochondrial function and aging pathways."
   seo_title: "Where to Buy NAD+ | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling NAD+ with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "NAD+, NAD plus, buy NAD+, NAD+ supplier, NAD+ source, where to buy NAD+, NAD peptide, NAD+ research, NAD+ review"
@@ -337,6 +350,7 @@ nad:
 
 igf-1-lr3:
   name: "IGF-1 LR3"
+  hub_blurb: "Long R3 IGF-1 analog — extended half-life version of IGF-1 with reduced IGFBP binding."
   seo_title: "Where to Buy IGF-1 LR3 | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling IGF-1 LR3 with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "IGF-1 LR3, IGF1 LR3, buy IGF-1 LR3, IGF-1 LR3 supplier, IGF-1 LR3 source, where to buy IGF-1 LR3, Long R3 IGF-1, IGF-1 LR3 review"
@@ -369,6 +383,7 @@ igf-1-lr3:
 
 aod-9604:
   name: "AOD-9604"
+  hub_blurb: "Modified hGH 176-191 fragment — studied for lipolysis and adipose tissue regulation."
   seo_title: "Where to Buy AOD-9604 | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling AOD-9604 with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "AOD-9604, AOD 9604, buy AOD-9604, AOD-9604 supplier, AOD-9604 source, where to buy AOD-9604, HGH fragment 176-191, AOD-9604 review"
@@ -401,6 +416,7 @@ aod-9604:
 
 tesamorelin:
   name: "Tesamorelin"
+  hub_blurb: "44-aa modified GHRH analog — researched for endogenous GH secretion and visceral adipose tissue."
   seo_title: "Where to Buy Tesamorelin | ThePeptideRadar"
   seo_description: "Explore peptide suppliers selling Tesamorelin with available COAs, lab sources, and shipping info. Country-filtered, transparency-first, no paid placements."
   seo_keywords: "Tesamorelin, buy Tesamorelin, Tesamorelin supplier, Tesamorelin source, where to buy Tesamorelin, Tesamorelin peptide, GHRH analog, Tesamorelin review"

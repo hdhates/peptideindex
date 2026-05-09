@@ -1,10 +1,8 @@
-"""Render all peptide guide pages from build/peptides.yaml + build/suppliers.yaml.
+"""Render peptide guide pages and the /peptides/ hub from build/peptides.yaml.
 
-Usage:  py build/render_peptides.py        # render every peptide
-        py build/render_peptides.py bpc-157 tb-500   # render specific slugs
-
-Outputs to ../peptides/<slug>.html relative to this script.
-Also rewrites ../sitemap.xml and ../peptides/index.html guide hub.
+Usage:  py build/render_peptides.py        # render every peptide + hub + sitemap
+        py build/render_peptides.py bpc-157 tb-500   # render specific slugs only
+                                                       (skips hub + sitemap)
 """
 from __future__ import annotations
 
@@ -68,6 +66,13 @@ DEFAULT_RELATED = [
 ]
 
 
+def render_hub(env: Environment, peptides: dict) -> None:
+    tmpl = env.get_template("hub_template.html.j2")
+    peptide_names = ", ".join(p["name"] for p in peptides.values())
+    html = tmpl.render(peptides=list(peptides.items()), peptide_names=peptide_names)
+    (PEPTIDES_DIR / "index.html").write_text(html, encoding="utf-8")
+
+
 def write_sitemap(slugs: list[str]) -> None:
     today = date.today().isoformat()
     static = [
@@ -115,6 +120,8 @@ def main() -> None:
         print(f"  wrote peptides/{slug}.html")
 
     if not only:
+        render_hub(env, peptides)
+        print("  wrote peptides/index.html (hub)")
         write_sitemap(list(peptides.keys()))
         print("  wrote sitemap.xml")
 

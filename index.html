@@ -248,7 +248,7 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .scard-right{flex:1;display:flex;flex-direction:column;min-width:0;}
 .scard-new{background:var(--green);color:#0a0a0f;font-size:9px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:100px;text-transform:uppercase;margin-left:8px;vertical-align:middle;display:inline-block;}
 .scard-featured-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(90deg,rgba(255,193,7,0.15),rgba(255,193,7,0.05));border:0.5px solid rgba(255,193,7,0.4);color:#ffc107;font-size:10px;font-weight:800;letter-spacing:0.8px;padding:4px 10px;border-radius:100px;text-transform:uppercase;margin-bottom:10px;width:fit-content;}
-.scard-stars-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:12px;}
+.scard-stars-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
 @media(max-width:640px){.supplier-grid{padding:0 1rem 3rem;grid-template-columns:1fr;}.scard-left{flex:none;}.scard-right{flex:none;}}
 @keyframes cardReveal{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 @keyframes scanSweep{0%{background-position:200% center;}100%{background-position:-200% center;}}
@@ -287,7 +287,7 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;}
 .tag{background:rgba(255,255,255,0.03);border:0.5px solid rgba(255,255,255,0.07);color:rgba(240,237,232,0.4);font-size:10px;padding:2px 9px;border-radius:4px;letter-spacing:0.2px;}
 .rating-text{font-size:11px;color:rgba(240,237,232,0.35);margin-left:6px;}
-.scard-footer{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:0.5px solid rgba(255,255,255,0.06);margin-top:auto;}
+.scard-footer{padding-top:14px;border-top:0.5px solid rgba(255,255,255,0.06);margin-top:auto;}
 .scard-meta{font-size:11px;color:rgba(240,237,232,0.3);word-break:break-word;}
 .visit-btn{position:relative;overflow:hidden;background:var(--green);color:#0a0a0f;border:none;padding:10px 20px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:transform 0.2s,box-shadow 0.25s;letter-spacing:1px;text-transform:uppercase;z-index:0;}
 .visit-btn::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.18) 50%,transparent 100%);transform:translateX(-100%);transition:transform 0.5s ease;border-radius:100px;}
@@ -305,9 +305,10 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .all-reviews::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2);}
 
 
-.supplier-angle{display:flex;align-items:center;gap:10px;background:linear-gradient(105deg,rgba(78,207,122,0.2) 0%,rgba(78,207,122,0.09) 60%,rgba(78,207,122,0.03) 100%);border:0.5px solid rgba(78,207,122,0.55);border-left:2px solid var(--green);color:var(--green);font-size:15px;font-weight:900;letter-spacing:-0.3px;padding:14px 18px;border-radius:12px;margin-bottom:20px;box-shadow:0 0 40px rgba(78,207,122,0.14),0 6px 28px rgba(0,0,0,0.4),inset 0 1px 0 rgba(78,207,122,0.22);line-height:1.25;position:relative;overflow:hidden;}
-.supplier-angle::before{content:"";position:absolute;top:0;left:2px;right:0;height:1px;background:linear-gradient(90deg,var(--green),rgba(78,207,122,0.3),transparent);}
+.supplier-angle{display:inline-flex;align-items:center;gap:6px;background:rgba(78,207,122,0.08);border:0.5px solid rgba(78,207,122,0.28);color:var(--green);font-size:11px;font-weight:700;letter-spacing:0.4px;padding:5px 12px;border-radius:100px;margin-bottom:10px;}
 .click-reason{font-size:12px;color:rgba(240,237,232,0.45);line-height:1.6;margin-bottom:12px;}
+.scard-about{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:14px;}
+.scard-ship-inline{color:var(--text3);font-size:11px;}
 .coa-badge{display:inline-flex;align-items:center;gap:4px;background:none;border:none;color:rgba(78,207,122,0.5);font-size:9px;font-weight:600;padding:0;margin-bottom:10px;letter-spacing:0.4px;}
 .data-signals{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:8px;}
 .dsig{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:100px;font-size:9.5px;font-weight:500;letter-spacing:0.1px;white-space:nowrap;}
@@ -1055,27 +1056,26 @@ function buildCard(s){
   var nameEsc=s.name.replace(/'/g,"\\'");
   var topBadge=s.verified?'<div class="vbadge">Data Reviewed</div>':s.warning?'<div class="vbadge" style="color:#f5c542;border-color:rgba(245,197,66,0.3);">Data Pending</div>':'';
   var newBadge=s.isNew?'<span class="scard-new">New</span>':'';
-  var stars=s.reviews>0?'<div class="stars" style="margin-bottom:0;">'+renderStars(s.rating)+'<span class="rating-text">'+s.rating+' ('+s.reviews+')</span></div>':'<span class="rating-text">No reviews yet</span>';
   var reviewsLink=s.reviewsIoUrl?'<a href="'+s.reviewsIoUrl+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--green);font-size:10px;text-decoration:none;margin-left:8px;">✓ Reviews.io</a>':'';
   var judgeLink=s.judgeUrl?'<a href="'+s.judgeUrl+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--green);font-size:10px;text-decoration:none;margin-left:8px;">✓ Judge.me</a>':'';
 
   var html='<div class="scard'+(s.featured?' scard-featured':'')+'">';
   if(s.featured){html+='<div class="scard-featured-badge">★ Featured</div>';}
   html+='<div class="scard-top"><div class="scard-name">'+s.name+newBadge+'</div>'+topBadge+'</div>';
-  html+='<div class="scard-country">'+flagEmoji(s.country)+s.country+(s.note&&!s.warning?' <span style="color:var(--green);font-size:11px;margin-left:6px;">'+s.note+'</span>':'')+'</div>';
+  html+='<div class="scard-country">'+flagEmoji(s.country)+s.country+'<span class="scard-ship-inline"> · '+s.shipping+'</span></div>';
   html+='<div class="supplier-angle">✓ '+supplierAngle(s)+'</div>';
-  html+='<div class="scard-stars-row" style="margin-top:0;padding-top:0;margin-bottom:10px;">'+stars+judgeLink+reviewsLink+'</div>';
+  html+='<div class="scard-about">'+clickReason(s)+'</div>';
+  if(s.reviews>0){html+='<div class="scard-stars-row">'+renderStars(s.rating)+'<span class="rating-text">'+s.rating+' · '+s.reviews+' review'+(s.reviews===1?'':'s')+'</span>'+judgeLink+reviewsLink+'</div>';}
   if(s.featuredReview){html+='<div class="scard-review">"'+s.featuredReview+'"</div>';}
   if(s.coaCount&&s.verified){html+='<div class="coa-badge">✓ '+s.coaCount+' '+(s.coaSource||'lab')+' COAs reviewed</div>';}
   if(s.peptides&&s.peptides.length){html+='<div class="scard-peptides">'+s.peptides.slice(0,5).map(function(p){return '<span class="peptide-tag">'+p+'</span>';}).join('')+'</div>';}
-  html+='<div class="tags" style="margin-bottom:12px;flex-grow:1;align-content:flex-start;">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
-  html+='<div class="scard-footer" style="margin-top:auto;padding-top:14px;border-top:0.5px solid rgba(255,255,255,0.06);">';
-  html+='<span class="scard-meta">Ships in '+s.shipping+'</span>';
+  html+='<div class="tags" style="flex-grow:1;align-content:flex-start;">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
+  html+='<div class="scard-footer">';
   if(s.url2){
-    html+='<div style="display:flex;gap:8px;"><button class="visit-btn" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\',\'Clicked Supplier - Telegram\')">Telegram →</button>';
-    html+='<button class="visit-btn visit-btn-ghost" onclick="trackClick(\''+nameEsc+'\',\''+s.url2+'\',\'Clicked Supplier - WhatsApp\')">WhatsApp →</button></div>';
+    html+='<div style="display:flex;gap:8px;"><button class="visit-btn" style="flex:1;" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\',\'Clicked Supplier - Telegram\')">Telegram →</button>';
+    html+='<button class="visit-btn visit-btn-ghost" style="flex:1;" onclick="trackClick(\''+nameEsc+'\',\''+s.url2+'\',\'Clicked Supplier - WhatsApp\')">WhatsApp →</button></div>';
   } else {
-    html+='<button class="visit-btn" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\')">Check supplier →</button>';
+    html+='<button class="visit-btn" style="width:100%;" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\')">Visit '+s.name+' →</button>';
   }
   html+='</div></div>';
   return html;

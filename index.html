@@ -966,7 +966,8 @@ function updateStats(){
 function renderFilters(){
   const el = document.getElementById('country-filters');
   if(!suppliers.length){el.style.display='none';return;}
-  const allCountries=['All','Europe',...allShipCountries];
+  const rest=allShipCountries.filter(c=>!pinnedFilters.includes(c));
+  const allCountries=[...pinnedFilters,...rest];
   const pills=allCountries.map(c=>{
     const label=c==='All'?'🌍 All':c==='Europe'?'<img src="https://flagcdn.com/16x12/eu.png" style="vertical-align:middle;border-radius:2px;margin-right:5px;" alt=""> Europe':flagEmoji(c)+c;
     return `<div class="cf ${c===activeCountry?'active':''}" data-country="${c}" onclick="setCountry('${c}')">${label}</div>`;
@@ -1316,6 +1317,10 @@ updateStats();
 injectSupplierSchema();
 autoDetectCountry();
 maybeShowConsentBanner();
+document.querySelectorAll('details.faq-item').forEach(function(d){
+  var s=d.querySelector('summary');
+  if(s&&!s._faqFixed){s._faqFixed=true;s.addEventListener('click',function(e){e.preventDefault();d.open=!d.open;});}
+});
 (function(){
   var validPages=['landing','directory','contact','signup','verify'];
   function applyHash(){

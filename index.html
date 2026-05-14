@@ -275,7 +275,7 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
   border-radius:20px;padding:1.75rem 2rem;
   transition:border-color 0.3s,transform 0.3s,box-shadow 0.35s;
   display:flex;flex-direction:column;gap:0;min-width:0;word-wrap:break-word;overflow-wrap:break-word;
-  position:relative;overflow:hidden;cursor:pointer;min-height:460px;
+  position:relative;overflow:hidden;cursor:pointer;
   animation:cardReveal 0.4s ease forwards;}
 .scard:nth-child(2){animation-delay:0.07s;}
 .scard:nth-child(3){animation-delay:0.14s;}
@@ -1214,8 +1214,14 @@ function buildCard(s){
   if(s.reviews>0||judgeLink||reviewsLink){html+='<div class="scard-stars-row">'+stars+judgeLink+reviewsLink+'</div>';}
   if(s.featuredReview){html+='<div class="scard-review">"'+s.featuredReview+'"</div>';}
   if(s.coaCount&&s.verified){html+='<div class="coa-badge">✓ '+s.coaCount+' '+(s.coaSource||'lab')+' COAs reviewed</div>';}
-  if(s.peptides&&s.peptides.length){html+='<div class="scard-peptides">'+s.peptides.slice(0,5).map(function(p){var em=getPeptideEmoji(p);return '<span class="peptide-tag">'+(em?em+' ':'')+p+'</span>';}).join('')+'</div>';}
-  html+='<div class="tags" style="margin-bottom:12px;">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
+  if(s.peptides&&s.peptides.length){
+    var visiblePeps=s.peptides.slice(0,4);
+    var extraPeps=(s.catalog||s.peptides).length-visiblePeps.length;
+    var pepHtml=visiblePeps.map(function(p){var em=getPeptideEmoji(p);return '<span class="peptide-tag">'+(em?em+' ':'')+p+'</span>';}).join('');
+    if(extraPeps>0)pepHtml+='<span class="peptide-tag" style="color:rgba(82,190,115,0.4);border-color:rgba(82,190,115,0.1);">+'+extraPeps+' more</span>';
+    html+='<div class="scard-peptides">'+pepHtml+'</div>';
+  }
+  html+='<div class="tags" style="margin-bottom:12px;">'+s.tags.slice(0,3).map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
   var ctaShort={'Cernum Biosciences':'Cernum','EuroPeptides':'EuroPeptides','Uther':'Uther','Elytra Labs':'Elytra Labs','Pure Peptides UK':'Pure Peptides UK','Particle Peptides':'Particle Peptides','Peptide Centre':'Peptide Centre','Research Peptides Europe':'Research Peptides'};
   var ctaLabel='Visit '+(ctaShort[s.name]||s.name)+' →';
   html+='<div class="scard-footer">';

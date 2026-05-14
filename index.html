@@ -242,7 +242,13 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .cf-rest{display:inline-block;}
 .cf-select{display:inline-block;background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:12px;padding:6px 28px 6px 14px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;appearance:none;-webkit-appearance:none;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(240%2C237%2C232%2C0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
 .cf-select.active{background-color:var(--green-dim);border-color:rgba(126,232,162,0.4);color:var(--green);}
-.cf-select option{background:#111118;color:#f0ede8;}
+.cf-select option{background:#131219;color:#f0ede8;}
+.peptide-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;align-items:center;}
+.pf{background:rgba(255,255,255,0.03);border:0.5px solid var(--border);color:var(--text3);font-size:11px;padding:5px 12px;border-radius:100px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;letter-spacing:0.2px;}
+.pf:hover,.pf.active{background:rgba(82,190,115,0.08);border-color:rgba(82,190,115,0.3);color:var(--green);}
+.scard-promo{border:0.5px dashed rgba(255,255,255,0.1);border-radius:20px;padding:1.75rem 2rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:14px;background:rgba(255,255,255,0.01);position:relative;overflow:hidden;min-height:200px;}
+.scard-promo::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.025) 1px,transparent 1px);background-size:22px 22px;pointer-events:none;}
+.scard-featured{border:0.5px solid rgba(255,193,7,0.35)!important;background:linear-gradient(145deg,rgba(255,193,7,0.055),rgba(255,193,7,0.01) 60%,transparent)!important;box-shadow:0 0 40px rgba(255,193,7,0.06),0 2px 20px rgba(0,0,0,0.3)!important;}
 .supplier-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:0 2rem 4rem;max-width:1100px;margin:0 auto;}
 .scard-left{flex:0 0 320px;display:flex;flex-direction:column;}
 .scard-right{flex:1;display:flex;flex-direction:column;min-width:0;}
@@ -537,6 +543,7 @@ html{scroll-padding-top:80px;}
       <button id="search-clear" onclick="clearSearch()" aria-label="Clear search" style="display:none;background:rgba(255,255,255,0.06);border:none;color:var(--text2);width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;padding:0;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='var(--text)';" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text2)';">×</button>
     </div>
     <div class="country-filters" id="country-filters"></div>
+    <div class="peptide-filters" id="peptide-filters"></div>
   </div>
   <div class="supplier-grid" id="supplier-grid"></div>
   <div style="text-align:center;color:var(--text3);font-size:13px;padding:0 2rem 2.5rem;max-width:1100px;margin:0 auto;font-style:italic;">Most users compare 2–3 suppliers before choosing. Use the Data Signals on each card to compare faster.</div>
@@ -936,6 +943,7 @@ const allShipCountries=[...new Set(suppliers.flatMap(s=>s.shipsTo||[s.country]))
 const europeanCountries=new Set(["Albania","Andorra","Austria","Belarus","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Italy","Kosovo","Latvia","Liechtenstein","Lithuania","Luxembourg","Malta","Moldova","Monaco","Montenegro","Netherlands","North Macedonia","Norway","Poland","Portugal","Romania","San Marino","Serbia","Slovakia","Slovenia","Spain","Sweden","Switzerland","Ukraine","United Kingdom","Vatican"]);
 const pinnedFilters=['All','United States','United Kingdom','Europe','Canada','Australia'];
 let activeCountry = 'All';
+let activePeptide = 'All';
 let searchTerm = '';
 let detectedCountry = '';
 
@@ -974,6 +982,26 @@ function renderFilters(){
   el.innerHTML=pills;
 }
 
+function supplierHasPeptide(s,p){
+  if(!p||p==='All')return true;
+  var norm=p.toLowerCase();
+  var arr=(s.catalog||[]).concat(s.peptides||[]);
+  return arr.some(function(x){return x.toLowerCase().indexOf(norm)>-1||norm.indexOf(x.toLowerCase())>-1;});
+}
+function renderPeptideFilters(){
+  var el=document.getElementById('peptide-filters');
+  if(!el)return;
+  var pills=['All','BPC-157','GHK-Cu','Retatrutide','TB-500','Selank','Tesamorelin','MOTS-c','Melanotan II','Semax','IGF-1 LR3','Sermorelin','NAD+','PT-141'];
+  el.innerHTML=pills.map(function(p){
+    return '<div class="pf'+(p===activePeptide?' active':'')+'" data-peptide="'+p+'" onclick="setPeptide(\''+p.replace(/'/g,"\\'")+'\')">'+( p==='All'?'All peptides':p)+'</div>';
+  }).join('');
+}
+function setPeptide(p){
+  activePeptide=p;
+  document.querySelectorAll('#peptide-filters [data-peptide]').forEach(function(el){el.classList.toggle('active',el.dataset.peptide===p);});
+  track('Filtered by Peptide',{peptide:p});
+  renderGrid();
+}
 function setCountry(c){
   activeCountry=c;
   document.querySelectorAll('#country-filters [data-country]').forEach(el=>el.classList.toggle('active',el.dataset.country===c));
@@ -1002,27 +1030,27 @@ function formatVerifiedDate(d){
 
 function supplierAngle(s){
   var angles={
-    'Cernum Biosciences':'US-based option',
-    'EuroPeptides':'Strong EU shipping option',
-    'Uther':'Large peptide catalog',
-    'Elytra Labs':'Fast US dispatch option',
-    'Pure Peptides UK':'Strong UK review profile',
-    'Particle Peptides':'EU/international option',
-    'Peptide Centre':'Australia + global option',
-    'Research Peptides Europe':'EU-wide shipping with public test data'
+    'Cernum Biosciences':'Janoshik COAs · Judge.me verified reviews',
+    'EuroPeptides':'1–7 day EU shipping · 10 community reviews',
+    'Uther':'60+ peptides including GLP-1s and nootropics',
+    'Elytra Labs':'HPLC + MS tested · same-day dispatch',
+    'Pure Peptides UK':'8+ years active · 8 verified Reviews.io reviews',
+    'Particle Peptides':'Endotoxin + heavy metals tested',
+    'Peptide Centre':'12 Janoshik COAs on file',
+    'Research Peptides Europe':'Public test results page · FedEx & UPS EU-wide'
   };
   return angles[s.name] || 'Supplier data available';
 }
 function clickReason(s){
   var reasons={
-    'Cernum Biosciences':'US-based supplier with visible lab tags, customer reviews, and popular research peptides.',
-    'EuroPeptides':'EU-focused supplier with fast regional shipping notes, reviews, and common peptide coverage.',
-    'Uther':'Large catalog with multiple lab-source tags and direct ordering options for international buyers.',
-    'Elytra Labs':'Newer US option with HPLC/MS references, fast dispatch claim, and popular peptide coverage.',
-    'Pure Peptides UK':'UK supplier with strong visible reviews, fast UK shipping, and broad international shipping notes.',
-    'Particle Peptides':'International/EU option with lab-testing tags and a broad peptide catalog; more data pending.',
-    'Peptide Centre':'Australia-based option with Janoshik-tagged COAs, fast AU shipping, and global shipping notes.',
-    'Research Peptides Europe':'Spain-based EU supplier with a public third-party test results page, EU-wide shipping via FedEx and UPS, and a focused catalog of popular research peptides.'
+    'Cernum Biosciences':'US-based with Janoshik-tagged COAs, active Judge.me reviews, and a broad catalog covering GLP-1s, GHRPs, and recovery peptides.',
+    'EuroPeptides':'Austria-based with fast EU + Switzerland shipping, 10 collected community reviews, and coverage across GHRPs, GLP-1s, and nootropic peptides.',
+    'Uther':'China-based with one of the widest catalogs available — 60+ compounds including GLP-1s, nootropics, and longevity peptides. Orders via Telegram or WhatsApp.',
+    'Elytra Labs':'US-based with HPLC and mass spectrometry COAs on file, same-day dispatch, and focused coverage on popular research compounds.',
+    'Pure Peptides UK':'UK-based with an 8+ year community presence, 8 verified Reviews.io reviews, and international shipping to 30+ countries.',
+    'Particle Peptides':'Slovakia-based with endotoxin and heavy metals testing in addition to HPLC — broader test coverage than most. More documentation being reviewed.',
+    'Peptide Centre':'Australia-based with 12 Janoshik COAs across product lines, fast AU domestic shipping, and shipping to US, UK, Canada, and New Zealand.',
+    'Research Peptides Europe':'Spain-based with a public third-party test results page, EU-wide shipping via FedEx and UPS, and a focused catalog of high-demand research peptides.'
   };
   return reasons[s.name] || 'Supplier listing includes available transparency signals and shipping details.';
 }
@@ -1121,7 +1149,8 @@ function renderGrid(){
     var matchCountry=activeCountry==='All'||(activeCountry==='Europe'?(s.shipsTo?s.shipsTo.some(c=>europeanCountries.has(c)):europeanCountries.has(s.country)):(s.shipsTo?s.shipsTo.includes(activeCountry):s.country===activeCountry));
     var norm=normalize(searchTerm);
     var matchSearch=s.name.toLowerCase().includes(searchTerm)||normalize(s.name).includes(norm)||fuzzyMatch(searchTerm,s.name)||s.tags.some(function(t){return t.toLowerCase().includes(searchTerm)||normalize(t).includes(norm);})||s.country.toLowerCase().includes(searchTerm)||(s.peptides&&s.peptides.some(function(p){return p.toLowerCase().includes(searchTerm)||normalize(p).includes(norm)||fuzzyMatch(searchTerm,p);}))||(s.catalog&&s.catalog.some(function(p){return p.toLowerCase().includes(searchTerm)||normalize(p).includes(norm)||fuzzyMatch(searchTerm,p);}));
-    return matchCountry&&matchSearch;
+    var matchPeptide=supplierHasPeptide(s,activePeptide);
+    return matchCountry&&matchSearch&&matchPeptide;
   });
   if(!filtered.length){
     var emptyTitle=searchTerm?'No results for "'+document.getElementById('search-input').value+'"':activeCountry!=='All'?'No suppliers ship to '+activeCountry+' yet':'No suppliers listed yet';
@@ -1130,7 +1159,8 @@ function renderGrid(){
     grid.innerHTML='<div style="grid-column:1/-1;padding:5rem 2rem;text-align:center;"><p style="font-size:22px;font-weight:700;margin-bottom:10px;color:var(--text);">'+emptyTitle+'</p><p style="font-size:14px;color:var(--text3);max-width:320px;margin:0 auto 1.5rem;">'+emptySub+'</p>'+emptyBtn+'</div>';
     return;
   }
-  grid.innerHTML=filtered.map(buildCard).join('');
+  var promoCard='<div class="scard-promo"><div style="position:relative;z-index:1;"><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:700;margin-bottom:8px;">Featured listing</div><div style="font-family:\'Plus Jakarta Sans\',sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.4px;color:var(--text);margin-bottom:8px;line-height:1.2;">Get your brand in front of this audience</div><div style="font-size:13px;color:var(--text3);line-height:1.6;max-width:280px;">Featured listings appear at the top of the directory with enhanced visibility and a highlighted card.</div></div><button class="visit-btn" style="position:relative;z-index:1;background:transparent;color:var(--green);border:0.5px solid rgba(82,190,115,0.4);" onclick="showPage(\'signup\')">Apply for a featured slot →</button></div>';
+  grid.innerHTML=filtered.map(buildCard).join('')+promoCard;
 }
 
 function normalize(s){return s.toLowerCase().replace(/[^a-z0-9]/g,'');}
@@ -1182,7 +1212,7 @@ function showPage(id){
   });
   window.scrollTo(0,0);
   document.title=pageTitles[id]||'ThePeptideRadar';
-  if(id!=='directory'){searchTerm='';activeCountry='All';var si=document.getElementById('search-input');if(si)si.value='';}
+  if(id!=='directory'){searchTerm='';activeCountry='All';activePeptide='All';var si=document.getElementById('search-input');if(si)si.value='';}
   renderFilters();
   if(id==='directory')renderGrid();
   document.querySelectorAll('.success-msg').forEach(function(el){el.style.display='none';});
@@ -1309,6 +1339,7 @@ function maybeShowConsentBanner(){
 }
 
 renderFilters();
+renderPeptideFilters();
 renderGrid();
 updateStats();
 injectSupplierSchema();

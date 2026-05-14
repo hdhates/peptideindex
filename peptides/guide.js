@@ -7,4 +7,9 @@ document.addEventListener('DOMContentLoaded',function(){
       nav.classList.toggle('open');
     });
   }
+  document.querySelectorAll('details.faq-item').forEach(function(d){
+    var s=d.querySelector('summary');
+    if(s){s.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();d.open=!d.open;});}
+    d.addEventListener('click',function(){d.open=!d.open;});
+  });
 });

@@ -1177,11 +1177,11 @@ function showPage(id){
   var pg=document.getElementById(id);
   pg.classList.add('active');
   pg.querySelectorAll('details.faq-item').forEach(function(d){
+    if(d._faqFixed)return;
+    d._faqFixed=true;
     var s=d.querySelector('summary');
-    if(s&&!s._faqFixed){
-      s._faqFixed=true;
-      s.addEventListener('click',function(e){e.preventDefault();d.open=!d.open;});
-    }
+    if(s){s.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();d.open=!d.open;});}
+    d.addEventListener('click',function(e){d.open=!d.open;});
   });
   window.scrollTo(0,0);
   document.title=pageTitles[id]||'ThePeptideRadar';
@@ -1318,8 +1318,11 @@ injectSupplierSchema();
 autoDetectCountry();
 maybeShowConsentBanner();
 document.querySelectorAll('details.faq-item').forEach(function(d){
+  if(d._faqFixed)return;
+  d._faqFixed=true;
   var s=d.querySelector('summary');
-  if(s&&!s._faqFixed){s._faqFixed=true;s.addEventListener('click',function(e){e.preventDefault();d.open=!d.open;});}
+  if(s){s.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();d.open=!d.open;});}
+  d.addEventListener('click',function(e){d.open=!d.open;});
 });
 (function(){
   var validPages=['landing','directory','contact','signup','verify'];

@@ -253,6 +253,8 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .country-filters::-webkit-scrollbar{display:none;}
 .peptide-filters{margin-bottom:1.5rem;display:flex;align-items:center;gap:6px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
 .peptide-filters::-webkit-scrollbar{display:none;}
+.filter-fade-wrap{position:relative;}
+.filter-fade-wrap::after{content:"";position:absolute;right:0;top:0;bottom:2px;width:64px;background:linear-gradient(to right,transparent,var(--bg) 80%);pointer-events:none;z-index:2;}
 .pf{background:rgba(255,255,255,0.03);border:0.5px solid var(--border);color:var(--text3);font-size:11px;padding:5px 11px;border-radius:100px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;letter-spacing:0.2px;display:inline-flex;align-items:center;gap:5px;}
 .pf:hover,.pf.active{background:rgba(82,190,115,0.08);border-color:rgba(82,190,115,0.3);color:var(--green);}
 .pf-count{font-size:9px;opacity:0.5;font-variant-numeric:tabular-nums;}
@@ -555,8 +557,8 @@ html{scroll-padding-top:80px;}
       <input type="text" placeholder="Search by supplier or peptide..." id="search-input" oninput="filterSuppliers();toggleSearchClear()"/>
       <button id="search-clear" onclick="clearSearch()" aria-label="Clear search" style="display:none;background:rgba(255,255,255,0.06);border:none;color:var(--text2);width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;padding:0;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='var(--text)';" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text2)';">×</button>
     </div>
-    <div class="country-filters" id="country-filters"></div>
-    <div class="peptide-filters" id="peptide-filters"></div>
+    <div class="filter-fade-wrap"><div class="country-filters" id="country-filters"></div></div>
+    <div class="filter-fade-wrap"><div class="peptide-filters" id="peptide-filters"></div></div>
   </div>
   <div class="supplier-grid" id="supplier-grid"></div>
   <div style="text-align:center;color:var(--text3);font-size:13px;padding:0 2rem 2.5rem;max-width:1100px;margin:0 auto;font-style:italic;">Most users compare 2–3 suppliers before choosing. Use the Data Signals on each card to compare faster.</div>

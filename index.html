@@ -249,7 +249,8 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .cf-select option{background:#131219;color:#f0ede8;}
 .filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:0.75rem;align-items:center;}
 .filter-row-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:700;white-space:nowrap;flex-shrink:0;padding:5px 4px 5px 0;min-width:52px;}
-.country-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0.75rem;align-items:center;}
+.country-filters{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:0.75rem;align-items:center;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
+.country-filters::-webkit-scrollbar{display:none;}
 .peptide-filters{margin-bottom:1.5rem;display:flex;align-items:center;gap:6px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
 .peptide-filters::-webkit-scrollbar{display:none;}
 .pf{background:rgba(255,255,255,0.03);border:0.5px solid var(--border);color:var(--text3);font-size:11px;padding:5px 11px;border-radius:100px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;letter-spacing:0.2px;display:inline-flex;align-items:center;gap:5px;}
@@ -453,8 +454,10 @@ footer span{font-size:12px;color:var(--text3);}
   .scard-top{flex-wrap:wrap;gap:8px;}
   .faq-item summary{font-size:15px;}
   .faq-item{padding:16px 18px;}
-  .scard-footer .visit-btn,.scard-footer button.visit-btn{font-size:11px;padding:11px 18px;}
-  .scard-footer > div[style*="display:flex"]{flex-direction:column;gap:8px !important;}
+  .scard-footer{flex-direction:column;gap:10px;}
+  .scard-footer .visit-btn,.scard-footer button.visit-btn,.scard-footer>div{width:100%;font-size:11px;padding:12px 18px;}
+  .scard-footer>div{display:flex;gap:8px;}
+  .scard-footer>div .visit-btn{flex:1;}
   #top-suppliers,#guides-anchor-target > div[style*="grid"]{grid-template-columns:1fr !important;}
   #consent-banner > div{flex-direction:column;align-items:stretch;gap:0.75rem;}
   #consent-banner > div > div:last-child{display:grid !important;grid-template-columns:1fr 1fr;}
@@ -1007,9 +1010,11 @@ function renderPeptideFilters(){
   var withCounts=candidates.map(function(p){
     return {p:p,n:suppliers.filter(function(s){return supplierHasPeptide(s,p);}).length};
   }).filter(function(x){return x.n>0;}).sort(function(a,b){return b.n-a.n;});
+  var emojiMap={'BPC-157':'🔬','GHK-Cu':'✨','Retatrutide':'⚡','TB-500':'💪','Selank':'🧠','Tesamorelin':'🏃','MOTS-c':'🧬','Melanotan II':'☀️','Semax':'🧠','IGF-1 LR3':'📈','Sermorelin':'💫','NAD+':'⚡','PT-141':'🔥'};
   var allPill='<div class="pf'+(activePeptide==='All'?' active':'')+'" data-peptide="All" onclick="setPeptide(\'All\')">All <span class="pf-count">'+suppliers.length+'</span></div>';
   var pills=withCounts.map(function(x){
-    return '<div class="pf'+(x.p===activePeptide?' active':'')+'" data-peptide="'+x.p+'" onclick="setPeptide(\''+x.p.replace(/'/g,"\\'")+'\')">'+x.p+' <span class="pf-count">'+x.n+'</span></div>';
+    var em=emojiMap[x.p]?emojiMap[x.p]+' ':'';
+    return '<div class="pf'+(x.p===activePeptide?' active':'')+'" data-peptide="'+x.p+'" onclick="setPeptide(\''+x.p.replace(/'/g,"\\'")+'\')">'+em+x.p+' <span class="pf-count">'+x.n+'</span></div>';
   }).join('');
   el.innerHTML='<span class="filter-row-label">Peptide</span>'+allPill+pills;
 }
@@ -1112,14 +1117,16 @@ function buildCard(s){
   if(s.featuredReview){html+='<div class="scard-review">"'+s.featuredReview+'"</div>';}
   if(s.coaCount&&s.verified){html+='<div class="coa-badge">✓ '+s.coaCount+' '+(s.coaSource||'lab')+' COAs reviewed</div>';}
   if(s.peptides&&s.peptides.length){html+='<div class="scard-peptides">'+s.peptides.slice(0,5).map(function(p){return '<span class="peptide-tag">'+p+'</span>';}).join('')+'</div>';}
-  html+='<div class="tags" style="margin-bottom:12px;flex-grow:1;align-content:flex-start;">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
+  html+='<div class="tags" style="margin-bottom:12px;">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
+  var ctaShort={'Cernum Biosciences':'Cernum','EuroPeptides':'EuroPeptides','Uther':'Uther','Elytra Labs':'Elytra Labs','Pure Peptides UK':'Pure Peptides UK','Particle Peptides':'Particle Peptides','Peptide Centre':'Peptide Centre','Research Peptides Europe':'Research Peptides'};
+  var ctaLabel='Visit '+(ctaShort[s.name]||s.name)+' →';
   html+='<div class="scard-footer">';
   html+='<span class="scard-meta">'+s.shipping+'</span>';
   if(s.url2){
     html+='<div style="display:flex;gap:8px;"><button class="visit-btn" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\',\'Clicked Supplier - Telegram\')">Telegram →</button>';
     html+='<button class="visit-btn visit-btn-ghost" onclick="trackClick(\''+nameEsc+'\',\''+s.url2+'\',\'Clicked Supplier - WhatsApp\')">WhatsApp →</button></div>';
   } else {
-    html+='<button class="visit-btn" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\')">Check supplier →</button>';
+    html+='<button class="visit-btn" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\')">'+ctaLabel+'</button>';
   }
   html+='</div></div>';
   return html;
@@ -1232,7 +1239,7 @@ function showPage(id){
   document.title=pageTitles[id]||'ThePeptideRadar';
   if(id!=='directory'){searchTerm='';activeCountry='All';activePeptide='All';var si=document.getElementById('search-input');if(si)si.value='';}
   renderFilters();
-  if(id==='directory')renderGrid();
+  if(id==='directory'){renderPeptideFilters();renderGrid();}
   document.querySelectorAll('.success-msg').forEach(function(el){el.style.display='none';});
   document.querySelectorAll('.nav-links a').forEach(function(a){
     var onclick=a.getAttribute('onclick')||'';

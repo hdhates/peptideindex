@@ -563,7 +563,7 @@ html{scroll-padding-top:80px;}
     <p>Browse peptide vendors by country, COA availability, lab sources, and transparency signals. <button onclick="suggestSupplier()" style="background:none;border:none;color:var(--green);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;text-decoration:underline;">+ Suggest a supplier</button></p>
     <div class="search-bar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(240,237,232,0.3)" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="Search by supplier or peptide..." id="search-input" oninput="filterSuppliers();toggleSearchClear()"/>
+      <input type="text" placeholder="Search by supplier or peptide..." id="search-input" aria-label="Search suppliers and peptides" oninput="filterSuppliers();toggleSearchClear()"/>
       <button id="search-clear" onclick="clearSearch()" aria-label="Clear search" style="display:none;background:rgba(255,255,255,0.06);border:none;color:var(--text2);width:22px;height:22px;border-radius:50%;cursor:pointer;font-size:14px;line-height:1;padding:0;align-items:center;justify-content:center;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.12)';this.style.color='var(--text)';" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.color='var(--text2)';">×</button>
     </div>
     <div class="country-filters" id="country-filters"></div>

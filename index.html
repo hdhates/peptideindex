@@ -254,7 +254,7 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .peptide-filters{margin-bottom:1.5rem;display:flex;align-items:center;gap:6px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;}
 .peptide-filters::-webkit-scrollbar{display:none;}
 .filter-fade-wrap{position:relative;}
-.filter-fade-wrap::after{content:"";position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(to right,transparent 0%,var(--bg) 70%);pointer-events:none;z-index:2;}
+.filter-fade-wrap::after{content:"›";position:absolute;right:0;top:0;bottom:0;width:88px;background:linear-gradient(to right,transparent 0%,var(--bg) 55%);pointer-events:none;z-index:2;display:flex;align-items:center;justify-content:flex-end;padding-right:2px;color:rgba(240,237,232,0.22);font-size:18px;line-height:1;}
 .pf{background:rgba(255,255,255,0.03);border:0.5px solid var(--border);color:var(--text3);font-size:11px;padding:5px 11px;border-radius:100px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;letter-spacing:0.2px;display:inline-flex;align-items:center;gap:5px;}
 .pf:hover,.pf.active{background:rgba(82,190,115,0.08);border-color:rgba(82,190,115,0.3);color:var(--green);}
 .pf-count{font-size:9px;opacity:0.5;font-variant-numeric:tabular-nums;}
@@ -1115,7 +1115,7 @@ function buildCard(s){
   html+='<div class="scard-top"><div class="scard-name">'+s.name+newBadge+'</div>'+topBadge+'</div>';
   html+='<div class="scard-country">'+flagEmoji(s.country)+s.country+(s.note&&!s.warning?' <span style="color:var(--green);font-size:11px;margin-left:6px;">'+s.note+'</span>':'')+'</div>';
   html+='<div class="supplier-angle">✓ '+supplierAngle(s)+'</div>';
-  html+='<div class="scard-stars-row">'+stars+judgeLink+reviewsLink+'</div>';
+  if(s.reviews>0||judgeLink||reviewsLink){html+='<div class="scard-stars-row">'+stars+judgeLink+reviewsLink+'</div>';}
   if(s.featuredReview){html+='<div class="scard-review">"'+s.featuredReview+'"</div>';}
   if(s.coaCount&&s.verified){html+='<div class="coa-badge">✓ '+s.coaCount+' '+(s.coaSource||'lab')+' COAs reviewed</div>';}
   if(s.peptides&&s.peptides.length){html+='<div class="scard-peptides">'+s.peptides.slice(0,5).map(function(p){return '<span class="peptide-tag">'+p+'</span>';}).join('')+'</div>';}

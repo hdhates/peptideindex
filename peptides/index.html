@@ -22,29 +22,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="/peptides/guide.css"/>
 <style>
-/* Peptide index page specifics */
-.hero{padding:3.5rem 2rem 2.5rem;max-width:820px;margin:0 auto;position:relative;z-index:1;}
-.badge{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);background:rgba(78,207,122,0.08);border:0.5px solid rgba(78,207,122,0.2);padding:5px 14px;border-radius:100px;margin-bottom:1.25rem;font-weight:700;}
-.guides-section{max-width:820px;margin:0 auto;padding:0 2rem 5rem;position:relative;z-index:1;}
-.section-header{margin-bottom:1.5rem;}
-.section-count{font-size:12px;color:var(--text3);margin-top:4px;}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-.pcard{display:block;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.005) 3px,rgba(255,255,255,0.005) 4px),linear-gradient(145deg,rgba(255,255,255,0.03),rgba(255,255,255,0.006));border:0.5px solid var(--border);border-radius:16px;padding:1.25rem 1.5rem;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;text-decoration:none;}
-.pcard::before{content:"";position:absolute;top:0;left:-100%;width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);transition:left 0.55s ease;opacity:0.7;}
+.pg-badge{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);background:rgba(78,207,122,0.08);border:0.5px solid rgba(78,207,122,0.2);padding:5px 14px;border-radius:100px;margin-bottom:1.25rem;font-weight:700;}
+.guides-list{margin-top:1.5rem;border-top:0.5px solid var(--border);}
+.prow{display:flex;align-items:center;gap:1.5rem;padding:1.1rem 0.25rem;border-bottom:0.5px solid var(--border);text-decoration:none;color:inherit;transition:padding-left 0.2s;position:relative;}
 @media(hover:hover){
-  .pcard:hover{border-color:rgba(78,207,122,0.35);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,0.45),0 0 0 0.5px rgba(78,207,122,0.18);}
-  .pcard:hover::before{left:140%;}
+  .prow:hover{padding-left:0.75rem;}
+  .prow:hover .prow-name{color:var(--green);}
+  .prow:hover .prow-arrow{transform:translateX(4px);opacity:1;}
 }
-.pcard-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.pcard-header h2{font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.4px;color:var(--text);margin:0;}
-.arrow{color:var(--green);font-size:16px;opacity:0.7;transition:transform 0.2s;}
-.pcard:hover .arrow{transform:translateX(3px);}
-.count{font-size:11px;color:rgba(78,207,122,0.65);letter-spacing:0.3px;margin-bottom:8px;font-weight:600;}
-.desc{font-size:13px;color:var(--text3);line-height:1.6;}
+.prow-body{flex:1;min-width:0;}
+.prow-name{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;letter-spacing:-0.3px;color:var(--text);transition:color 0.2s;margin-bottom:3px;}
+.prow-desc{font-size:12px;color:var(--text3);line-height:1.45;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.prow-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.prow-count{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgba(78,207,122,0.65);white-space:nowrap;}
+.prow-arrow{color:var(--green);font-size:14px;opacity:0.35;transition:transform 0.2s,opacity 0.2s;}
 @media(max-width:640px){
-  .hero{padding:2rem 1.25rem 1.5rem;}
-  .guides-section{padding:0 1.25rem 3rem;}
-  .grid{grid-template-columns:1fr;}
+  .prow-desc{display:none;}
+  .prow-name{font-size:15px;}
 }
 </style>
 </head>
@@ -57,111 +51,87 @@
   <ul class="nav-links" id="nav-links">
     <li><a href="/">Home</a></li>
     <li><a href="/#directory">Directory</a></li>
-    <li><a href="/peptides/" class="active">Guides</a></li>
+    <li><a href="/peptides/">Guides</a></li>
     <li><a href="/#contact">Contact</a></li>
   </ul>
   <a href="/#directory" class="nav-cta">Explore Directory</a>
   <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="crumb"><a href="/">Home</a> / Peptides</div>
-    <div class="badge">16+ Guides Available</div>
-    <h1>Peptide <em>Buyer's Guides</em></h1>
-    <p class="lead">In-depth buyer's guides for the most popular research peptides. Each guide surfaces lab data, third-party COAs, and shipping details so you can compare suppliers with more context. No paid placements.</p>
-  </div>
-</section>
+<main>
+  <div class="crumb"><a href="/">Home</a> / Guides</div>
+  <span class="pg-badge">16 Guides</span>
+  <h1>Peptide <em>Buyer's Guides</em></h1>
+  <p class="lead">Trusted suppliers for each peptide — lab data, third-party COAs, and shipping details surfaced so you can compare with more context. No paid placements.</p>
 
-<section class="guides-section">
-  <div class="section-header">
-    <div class="section-tag">All Guides</div>
-    <div class="section-count">16+ peptides · trusted suppliers</div>
-  </div>
-  <div class="grid">
-    <a class="pcard" href="/peptides/bpc-157.html">
-      <div class="pcard-header"><h2>BPC-157</h2><span class="arrow">→</span></div>
-      <div class="count">7 suppliers</div>
-      <div class="desc">Body Protection Compound 157 — widely studied for tissue repair, gut health, and tendon healing.</div>
+  <div class="section-tag">All Guides</div>
+  <div class="guides-list">
+    <a class="prow" href="/peptides/bpc-157.html">
+      <div class="prow-body"><div class="prow-name">BPC-157</div><div class="prow-desc">Tissue repair, gut health &amp; tendon healing</div></div>
+      <div class="prow-right"><span class="prow-count">7 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/tb-500.html">
-      <div class="pcard-header"><h2>TB-500</h2><span class="arrow">→</span></div>
-      <div class="count">5 suppliers</div>
-      <div class="desc">Thymosin Beta-4 fragment — researched for tissue repair, often paired with BPC-157.</div>
+    <a class="prow" href="/peptides/tb-500.html">
+      <div class="prow-body"><div class="prow-name">TB-500</div><div class="prow-desc">Thymosin Beta-4 fragment — tissue repair, often paired with BPC-157</div></div>
+      <div class="prow-right"><span class="prow-count">5 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/ghk-cu.html">
-      <div class="pcard-header"><h2>GHK-Cu</h2><span class="arrow">→</span></div>
-      <div class="count">7 suppliers</div>
-      <div class="desc">Copper-binding tripeptide — researched for skin remodeling, wound healing, and antioxidant effects.</div>
+    <a class="prow" href="/peptides/ghk-cu.html">
+      <div class="prow-body"><div class="prow-name">GHK-Cu</div><div class="prow-desc">Copper-binding tripeptide — skin remodeling &amp; wound healing</div></div>
+      <div class="prow-right"><span class="prow-count">7 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/retatrutide.html">
-      <div class="pcard-header"><h2>Retatrutide</h2><span class="arrow">→</span></div>
-      <div class="count">5 suppliers</div>
-      <div class="desc">Investigational triple agonist (GLP-1, GIP, glucagon) — studied for metabolic effects.</div>
+    <a class="prow" href="/peptides/retatrutide.html">
+      <div class="prow-body"><div class="prow-name">Retatrutide</div><div class="prow-desc">Triple agonist GLP-1/GIP/glucagon — metabolic research</div></div>
+      <div class="prow-right"><span class="prow-count">5 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/tirzepatide.html">
-      <div class="pcard-header"><h2>Tirzepatide</h2><span class="arrow">→</span></div>
-      <div class="count">1 supplier</div>
-      <div class="desc">Dual GIP and GLP-1 receptor agonist — widely studied for metabolic effects.</div>
+    <a class="prow" href="/peptides/tirzepatide.html">
+      <div class="prow-body"><div class="prow-name">Tirzepatide</div><div class="prow-desc">Dual GIP &amp; GLP-1 receptor agonist — metabolic effects</div></div>
+      <div class="prow-right"><span class="prow-count">1 supplier</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/semaglutide.html">
-      <div class="pcard-header"><h2>Semaglutide</h2><span class="arrow">→</span></div>
-      <div class="count">1 supplier</div>
-      <div class="desc">GLP-1 receptor agonist — research-grade peptide for laboratory study.</div>
+    <a class="prow" href="/peptides/semaglutide.html">
+      <div class="prow-body"><div class="prow-name">Semaglutide</div><div class="prow-desc">GLP-1 receptor agonist — research-grade</div></div>
+      <div class="prow-right"><span class="prow-count">1 supplier</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/melanotan-ii.html">
-      <div class="pcard-header"><h2>Melanotan II</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">Synthetic alpha-MSH analog — researched for melanogenesis effects.</div>
+    <a class="prow" href="/peptides/igf-1-lr3.html">
+      <div class="prow-body"><div class="prow-name">IGF-1 LR3</div><div class="prow-desc">Long R3 IGF-1 analog — extended half-life, reduced IGFBP binding</div></div>
+      <div class="prow-right"><span class="prow-count">4 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/cjc-1295-ipamorelin.html">
-      <div class="pcard-header"><h2>CJC-1295 / Ipamorelin</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">GHRH analog and GH secretagogue blend — popular synergistic GH-axis research pair.</div>
+    <a class="prow" href="/peptides/mots-c.html">
+      <div class="prow-body"><div class="prow-name">MOTS-c</div><div class="prow-desc">Mitochondrial peptide — metabolic regulation &amp; insulin sensitivity</div></div>
+      <div class="prow-right"><span class="prow-count">3 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/mots-c.html">
-      <div class="pcard-header"><h2>MOTS-c</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">Mitochondrial-derived peptide — researched for metabolic regulation, insulin sensitivity, and exercise adaptations.</div>
+    <a class="prow" href="/peptides/cjc-1295-ipamorelin.html">
+      <div class="prow-body"><div class="prow-name">CJC-1295 / Ipamorelin</div><div class="prow-desc">GHRH analog + GH secretagogue — GH-axis research pair</div></div>
+      <div class="prow-right"><span class="prow-count">2 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/sermorelin.html">
-      <div class="pcard-header"><h2>Sermorelin</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">29-aa GHRH analog — studied for endogenous growth hormone release via the pituitary.</div>
+    <a class="prow" href="/peptides/sermorelin.html">
+      <div class="prow-body"><div class="prow-name">Sermorelin</div><div class="prow-desc">29-aa GHRH analog — endogenous GH release via pituitary</div></div>
+      <div class="prow-right"><span class="prow-count">3 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/selank.html">
-      <div class="pcard-header"><h2>Selank</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">Synthetic heptapeptide — researched for anxiolytic-like effects, immune modulation, and cognitive endpoints.</div>
+    <a class="prow" href="/peptides/melanotan-ii.html">
+      <div class="prow-body"><div class="prow-name">Melanotan II</div><div class="prow-desc">Synthetic alpha-MSH analog — melanogenesis research</div></div>
+      <div class="prow-right"><span class="prow-count">2 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/pt-141.html">
-      <div class="pcard-header"><h2>PT-141</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">Bremelanotide — melanocortin MC4R agonist studied for sexual response and CNS-mediated endpoints.</div>
+    <a class="prow" href="/peptides/selank.html">
+      <div class="prow-body"><div class="prow-name">Selank</div><div class="prow-desc">Synthetic heptapeptide — anxiolytic-like effects &amp; immune modulation</div></div>
+      <div class="prow-right"><span class="prow-count">3 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/nad.html">
-      <div class="pcard-header"><h2>NAD+</h2><span class="arrow">→</span></div>
-      <div class="count">2 suppliers</div>
-      <div class="desc">Coenzyme central to redox reactions — researched for mitochondrial function and aging pathways.</div>
+    <a class="prow" href="/peptides/pt-141.html">
+      <div class="prow-body"><div class="prow-name">PT-141</div><div class="prow-desc">Bremelanotide — MC4R agonist, sexual response research</div></div>
+      <div class="prow-right"><span class="prow-count">2 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/igf-1-lr3.html">
-      <div class="pcard-header"><h2>IGF-1 LR3</h2><span class="arrow">→</span></div>
-      <div class="count">4 suppliers</div>
-      <div class="desc">Long R3 IGF-1 analog — extended half-life version of IGF-1 with reduced IGFBP binding.</div>
+    <a class="prow" href="/peptides/nad.html">
+      <div class="prow-body"><div class="prow-name">NAD+</div><div class="prow-desc">Coenzyme — mitochondrial function &amp; aging pathways</div></div>
+      <div class="prow-right"><span class="prow-count">2 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/aod-9604.html">
-      <div class="pcard-header"><h2>AOD-9604</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">Modified hGH 176-191 fragment — studied for lipolysis and adipose tissue regulation.</div>
+    <a class="prow" href="/peptides/aod-9604.html">
+      <div class="prow-body"><div class="prow-name">AOD-9604</div><div class="prow-desc">hGH 176-191 fragment — lipolysis &amp; adipose tissue research</div></div>
+      <div class="prow-right"><span class="prow-count">3 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
-    <a class="pcard" href="/peptides/tesamorelin.html">
-      <div class="pcard-header"><h2>Tesamorelin</h2><span class="arrow">→</span></div>
-      <div class="count">3 suppliers</div>
-      <div class="desc">44-aa modified GHRH analog — researched for endogenous GH secretion and visceral adipose tissue.</div>
+    <a class="prow" href="/peptides/tesamorelin.html">
+      <div class="prow-body"><div class="prow-name">Tesamorelin</div><div class="prow-desc">44-aa GHRH analog — GH secretion &amp; visceral adipose research</div></div>
+      <div class="prow-right"><span class="prow-count">3 suppliers</span><span class="prow-arrow">→</span></div>
     </a>
   </div>
-</section>
+</main>
 
 <footer>
   <div class="footer-main">

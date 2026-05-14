@@ -236,15 +236,20 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .search-bar{display:flex;align-items:center;gap:12px;background:var(--bg2);border:0.5px solid var(--border2);border-radius:14px;padding:1rem 1.25rem;margin-bottom:1.25rem;}
 .search-bar input{background:transparent;border:none;outline:none;font-family:'DM Sans',sans-serif;font-size:15px;color:var(--text);flex:1;}
 .search-bar input::placeholder{color:var(--text3);}
-.country-filters{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:2rem;padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none;}
-.country-filters::-webkit-scrollbar{display:none;}
+.country-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;align-items:center;}
 .cf{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:12px;padding:6px 14px;border-radius:100px;cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif;white-space:nowrap;}
 .cf:hover,.cf.active{background:var(--green-dim);border-color:rgba(126,232,162,0.4);color:var(--green);}
-.cf-select{background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:12px;padding:6px 28px 6px 14px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;appearance:none;-webkit-appearance:none;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(240%2C237%2C232%2C0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;display:none;}
+.cf-rest{display:none;}
+.cf-select{display:inline-block;background:rgba(255,255,255,0.04);border:0.5px solid var(--border);color:var(--text2);font-size:12px;padding:6px 28px 6px 14px;border-radius:100px;cursor:pointer;font-family:'DM Sans',sans-serif;appearance:none;-webkit-appearance:none;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='rgba(240%2C237%2C232%2C0.3)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;}
 .cf-select.active{background-color:var(--green-dim);border-color:rgba(126,232,162,0.4);color:var(--green);}
 .cf-select option{background:#111118;color:#f0ede8;}
-@media(max-width:640px){.cf-rest{display:none;}.cf-select{display:inline-block;}}
-.supplier-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;padding:0 2rem 4rem;max-width:1100px;margin:0 auto;align-items:stretch;}
+.supplier-grid{display:grid;grid-template-columns:1fr;gap:12px;padding:0 2rem 4rem;max-width:1100px;margin:0 auto;}
+.scard-left{flex:0 0 320px;display:flex;flex-direction:column;}
+.scard-right{flex:1;display:flex;flex-direction:column;min-width:0;}
+.scard-new{background:var(--green);color:#0a0a0f;font-size:9px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:100px;text-transform:uppercase;margin-left:8px;vertical-align:middle;display:inline-block;}
+.scard-featured-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(90deg,rgba(255,193,7,0.15),rgba(255,193,7,0.05));border:0.5px solid rgba(255,193,7,0.4);color:#ffc107;font-size:10px;font-weight:800;letter-spacing:0.8px;padding:4px 10px;border-radius:100px;text-transform:uppercase;margin-bottom:10px;width:fit-content;}
+.scard-stars-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:auto;padding-top:12px;}
+@media(max-width:640px){.supplier-grid{padding:0 1rem 3rem;}.scard{flex-direction:column !important;}.scard-left{flex:none;}.scard-right{flex:none;}}
 @keyframes cardReveal{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 @keyframes scanSweep{0%{background-position:200% center;}100%{background-position:-200% center;}}
 .scard{
@@ -252,9 +257,9 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
     repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,0.006) 3px,rgba(255,255,255,0.006) 4px),
     linear-gradient(145deg,rgba(255,255,255,0.038) 0%,rgba(255,255,255,0.008) 60%,rgba(78,207,122,0.012) 100%);
   border:0.5px solid rgba(255,255,255,0.08);
-  border-radius:20px;padding:1.75rem 1.5rem 1.5rem;
+  border-radius:20px;padding:1.75rem 2rem;
   transition:border-color 0.3s,transform 0.3s,box-shadow 0.35s;
-  display:flex;flex-direction:column;min-width:0;word-wrap:break-word;overflow-wrap:break-word;
+  display:flex;flex-direction:row;gap:2.5rem;min-width:0;word-wrap:break-word;overflow-wrap:break-word;
   position:relative;overflow:hidden;
   animation:cardReveal 0.45s ease both;}
 .scard:nth-child(2){animation-delay:0.07s;}
@@ -926,7 +931,7 @@ function flagEmoji(country){var c=codeMap[country];return c?'<img src="https://f
 
 const allShipCountries=[...new Set(suppliers.flatMap(s=>s.shipsTo||[s.country]))].sort();
 const europeanCountries=new Set(["Albania","Andorra","Austria","Belarus","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Cyprus","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Italy","Kosovo","Latvia","Liechtenstein","Lithuania","Luxembourg","Malta","Moldova","Monaco","Montenegro","Netherlands","North Macedonia","Norway","Poland","Portugal","Romania","San Marino","Serbia","Slovakia","Slovenia","Spain","Sweden","Switzerland","Ukraine","United Kingdom","Vatican"]);
-const pinnedFilters=['All','United States','Canada','Europe'];
+const pinnedFilters=['All','United States','Canada','Europe','United Kingdom','Australia'];
 let activeCountry = 'All';
 let searchTerm = '';
 let detectedCountry = '';
@@ -1046,62 +1051,36 @@ function renderDataSignals(s){
 }
 
 function buildCard(s){
-  var h='<div class="scard'+(s.featured?' scard-featured':'')+'">';
-  if(s.featured){h+='<div style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(90deg,rgba(255,193,7,0.15),rgba(255,193,7,0.05));border:0.5px solid rgba(255,193,7,0.4);color:#ffc107;font-size:10px;font-weight:800;letter-spacing:0.8px;padding:4px 10px;border-radius:100px;text-transform:uppercase;margin-bottom:10px;" title="Featured = paid visibility. Does not change Data Signals.">★ Featured · paid visibility</div>';}
-  var topBadge=s.verified?'<div class="vbadge" title="Data reviewed '+formatVerifiedDate(s.verifiedDate)+'">Data Reviewed</div>':s.warning?'<div class="vbadge" style="background:rgba(245,197,66,0.12);color:#f5c542;">Data Pending</div>':'';
-  var newBadge=s.isNew?'<div style="display:inline-block;background:#4ecf7a;color:#0a0a0f;font-size:9px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:100px;text-transform:uppercase;margin-left:7px;vertical-align:middle;">New</div>':'';
-  h+='<div class="scard-top"><div class="scard-name">'+s.name+newBadge+'</div>'+topBadge+'</div>';
-  h+='<div class="scard-country">'+flagEmoji(s.country)+s.country+(s.note&&!s.warning?' <span style="font-size:11px;color:var(--green);margin-left:6px;">'+s.note+'</span>':'')+'</div>';
-  h+='<div class="supplier-angle">✓ '+supplierAngle(s)+'</div>';
-  h+='<div class="click-reason">'+clickReason(s)+'</div>';
-  if(s.coaCount&&s.verified){h+='<div class="coa-badge">✓ '+s.coaCount+' '+(s.coaSource||'lab')+' COAs reviewed</div>';}
-  h+=renderDataSignals(s);
-  var judgeLink=s.judgeMe?' &nbsp;<span style="color:var(--green);font-size:10px;">✓ Judge.me</span>':'';
-  var reviewsIoLink=s.reviewsIoUrl?' &nbsp;<a href="'+s.reviewsIoUrl+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--green);font-size:10px;text-decoration:none;">✓ Reviews.io</a>':'';
-  if(s.reviews>0){
-    h+='<div class="stars">'+renderStars(s.rating)+'<span class="rating-text">'+s.rating+' ('+s.reviews+' reviews)'+judgeLink+reviewsIoLink+'</span></div>';
-  }else{
-    h+='<div style="margin-bottom:12px;"><span class="rating-text">No reviews yet</span></div>';
-  }
-  if(s.featuredReview){
-    h+='<div onclick="event.stopPropagation()" style="margin-bottom:12px;">';
-    h+='<div style="font-size:12px;color:var(--text2);font-style:italic;padding:8px 12px;background:rgba(255,255,255,0.03);border-left:2px solid rgba(93,217,138,0.3);border-radius:0 6px 6px 0;margin-bottom:6px;">"'+s.featuredReview+'"</div>';
-    if(s.allReviews){
-      h+='<button data-count="'+s.reviews+'" onclick="toggleReviews(this);event.stopPropagation()" style="background:none;border:none;color:var(--green);font-size:11px;cursor:pointer;padding:6px 0;">See all '+s.reviews+' reviews ↓</button>';
-      h+='<div class="all-reviews" style="display:none;margin-top:8px;max-height:220px;overflow-y:auto;">';
-      s.allReviews.forEach(function(r){
-        h+='<div style="padding:8px 0;border-bottom:0.5px solid var(--border);">';
-        h+='<div style="display:flex;justify-content:space-between;margin-bottom:3px;">';
-        h+='<span style="font-size:12px;font-weight:500;color:var(--text);">'+r.author+(r.verified?' <span style="font-size:10px;color:var(--text3);">· Review source</span>':'')+'</span>';
-        h+='<span style="font-size:11px;color:var(--green);">';
-        for(var i=0;i<r.rating;i++)h+='★';
-        for(var i=r.rating;i<5;i++)h+='☆';
-        h+='</span></div>';
-        h+='<p style="font-size:12px;color:var(--text2);">'+r.text+'</p>';
-        h+='</div>';
-      });
-      h+='</div>';
-    }
-    h+='</div>';
-  }
-  h+='<div class="tags">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
-  if(s.peptides&&s.peptides.length){
-    h+='<div style="margin-bottom:14px;"><div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">Top Peptides</div><div style="display:flex;flex-wrap:wrap;gap:5px;">';
-    s.peptides.forEach(function(p){h+='<span style="font-size:11px;color:var(--text2);background:rgba(93,217,138,0.06);border:0.5px solid rgba(93,217,138,0.15);padding:2px 9px;border-radius:4px;">'+p+'</span>';});
-    h+='</div></div>';
-  }
   var nameEsc=s.name.replace(/'/g,"\\'");
-  var meta='<span class="scard-meta">Ships in '+s.shipping+' · <a href="#" onclick="reportSupplier(\''+nameEsc+'\');return false;" style="color:var(--text3);text-decoration:underline;">Report</a></span>';
+  var topBadge=s.verified?'<div class="vbadge">Data Reviewed</div>':s.warning?'<div class="vbadge" style="color:#f5c542;border-color:rgba(245,197,66,0.3);">Data Pending</div>':'';
+  var newBadge=s.isNew?'<span class="scard-new">New</span>':'';
+  var stars=s.reviews>0?'<div class="stars" style="margin-bottom:0;">'+renderStars(s.rating)+'<span class="rating-text">'+s.rating+' ('+s.reviews+')</span></div>':'<span class="rating-text">No reviews yet</span>';
+  var judgeLink=s.judgeMe?'<a href="#" style="color:var(--green);font-size:10px;text-decoration:none;margin-left:8px;">✓ Judge.me</a>':'';
+  var reviewsLink=s.reviewsIoUrl?'<a href="'+s.reviewsIoUrl+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--green);font-size:10px;text-decoration:none;margin-left:8px;">✓ Reviews.io</a>':'';
+
+  var left='<div class="scard-left">';
+  if(s.featured){left+='<div class="scard-featured-badge">★ Featured</div>';}
+  left+='<div class="scard-top"><div class="scard-name">'+s.name+newBadge+'</div>'+topBadge+'</div>';
+  left+='<div class="scard-country">'+flagEmoji(s.country)+s.country+(s.note&&!s.warning?' <span style="color:var(--green);font-size:11px;margin-left:6px;">'+s.note+'</span>':'')+'</div>';
+  left+='<div class="supplier-angle">✓ '+supplierAngle(s)+'</div>';
+  left+='<div class="scard-stars-row">'+stars+judgeLink+reviewsLink+'</div>';
+  left+='</div>';
+
+  var right='<div class="scard-right">';
+  right+=renderDataSignals(s);
+  if(s.coaCount&&s.verified){right+='<div class="coa-badge">✓ '+s.coaCount+' '+(s.coaSource||'lab')+' COAs reviewed</div>';}
+  right+='<div class="tags" style="margin-bottom:0;">'+s.tags.map(function(t){return '<div class="tag">'+t+'</div>';}).join('')+'</div>';
+  right+='<div class="scard-footer" style="margin-top:auto;padding-top:14px;border-top:0.5px solid rgba(255,255,255,0.06);">';
+  right+='<span class="scard-meta">Ships in '+s.shipping+'</span>';
   if(s.url2){
-    var btn1='<button class="visit-btn" style="flex:1;" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\',\'Clicked Supplier - Telegram\')">Check Telegram →</button>';
-    var btn2='<button class="visit-btn visit-btn-ghost" style="flex:1;" onclick="trackClick(\''+nameEsc+'\',\''+s.url2+'\',\'Clicked Supplier - WhatsApp\')">Check WhatsApp →</button>';
-    var contactNote='<div style="font-size:11px;color:var(--text3);font-style:italic;line-height:1.5;">Order via direct contact (common for international suppliers).</div>';
-    h+='<div class="scard-footer" style="flex-direction:column;align-items:flex-start;gap:10px;">'+meta+contactNote+'<div style="display:flex;gap:8px;width:100%;">'+btn1+btn2+'</div></div>';
+    right+='<div style="display:flex;gap:8px;"><button class="visit-btn" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\',\'Clicked Supplier - Telegram\')">Telegram →</button>';
+    right+='<button class="visit-btn visit-btn-ghost" onclick="trackClick(\''+nameEsc+'\',\''+s.url2+'\',\'Clicked Supplier - WhatsApp\')">WhatsApp →</button></div>';
   } else {
-    h+='<div class="scard-footer" style="flex-direction:column;align-items:flex-start;gap:10px;">'+meta+'<button class="visit-btn" style="width:100%;" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\')">Check supplier →</button></div>';
+    right+='<button class="visit-btn" onclick="trackClick(\''+nameEsc+'\',\''+s.url+'\')">Check supplier →</button>';
   }
-  h+='</div>';
-  return h;
+  right+='</div></div>';
+
+  return '<div class="scard'+(s.featured?' scard-featured')+'">' + left + right + '</div>';
 }
 
 function reportSupplier(name){

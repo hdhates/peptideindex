@@ -91,6 +91,7 @@ details.faq-item summary::-webkit-details-marker{display:none;}
 details.faq-item summary::after{content:"+";color:var(--green);font-size:22px;line-height:1;font-weight:300;flex-shrink:0;transition:transform 0.3s,color 0.2s;margin-top:1px;}
 details.faq-item[open] summary::after{transform:rotate(45deg);}
 details.faq-item p{margin-top:16px;color:var(--text2);font-size:14px;line-height:1.75;padding-bottom:2px;}
+details.faq-item:last-of-type{margin-bottom:2.5rem;}
 
 /* Related guides */
 .related-guides{margin:0 0 2.5rem;}

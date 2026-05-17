@@ -278,7 +278,7 @@ h1 em{font-style:normal;color:var(--green);position:relative;}
 .scard-featured-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(90deg,rgba(255,193,7,0.15),rgba(255,193,7,0.05));border:0.5px solid rgba(255,193,7,0.4);color:#ffc107;font-size:10px;font-weight:800;letter-spacing:0.8px;padding:4px 10px;border-radius:100px;text-transform:uppercase;margin-bottom:10px;width:fit-content;}
 .scard-stars-row{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
 @media(max-width:640px){.supplier-grid{padding:0 1rem 3rem;grid-template-columns:1fr;}.scard-left{flex:none;}.scard-right{flex:none;}}
-@keyframes cardReveal{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes cardReveal{from{opacity:0;}to{opacity:1;}}
 @keyframes scanSweep{0%{background-position:200% center;}100%{background-position:-200% center;}}
 .supplier-grid{align-items:stretch;}
 .scard{
@@ -1300,6 +1300,9 @@ function reportSupplier(name){
   track('Reported Supplier',{supplier_name:name});
 }
 
+var _cardCache={};
+var _gridInitialized=false;
+function buildCardCached(s){if(!_cardCache[s.name])_cardCache[s.name]=buildCard(s);return _cardCache[s.name];}
 function renderGrid(){
   const grid=document.getElementById('supplier-grid');
   const priorityCountry=(activeCountry!=='All'&&activeCountry!=='Europe')?activeCountry:detectedCountry;
@@ -1341,7 +1344,13 @@ function renderGrid(){
     return;
   }
   var promoCard='<div class="scard-promo"><div style="position:relative;z-index:1;"><div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-weight:700;margin-bottom:8px;">Featured listing</div><div style="font-family:\'Plus Jakarta Sans\',sans-serif;font-size:18px;font-weight:800;letter-spacing:-0.4px;color:var(--text);margin-bottom:8px;line-height:1.2;">Get your brand in front of this audience</div><div style="font-size:13px;color:var(--text3);line-height:1.6;max-width:280px;">Featured listings appear at the top of the directory with enhanced visibility and a highlighted card.</div></div><a class="visit-btn" href="/advertise.html" onclick="event.stopPropagation()" style="position:relative;z-index:1;background:transparent;color:var(--green);border:0.5px solid rgba(82,190,115,0.4);text-decoration:none;">Get featured →</a></div>';
-  grid.innerHTML=filtered.map(buildCard).join('')+promoCard;
+  var html=filtered.map(buildCardCached).join('')+promoCard;
+  if(!_gridInitialized){
+    grid.innerHTML=html;
+    _gridInitialized=true;
+  } else {
+    requestAnimationFrame(function(){grid.innerHTML=html;});
+  }
 }
 
 function normalize(s){return s.toLowerCase().replace(/[^a-z0-9]/g,'');}

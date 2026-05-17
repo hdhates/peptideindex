@@ -429,10 +429,15 @@ footer > *{position:relative;z-index:1;}
 footer span{font-size:12px;color:var(--text3);}
 .disclaimer{width:100%;font-size:11px;color:rgba(240,237,232,0.35);line-height:1.8;padding-top:1rem;border-top:0.5px solid var(--border);}
 
+/* NAV OVERLAY */
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99;backdrop-filter:blur(2px);}
+.nav-overlay.open{display:block;}
+
 /* ── MOBILE ── */
 @media(max-width:640px){
   nav{padding:0.85rem 1.25rem;flex-wrap:wrap;background:rgba(10,10,15,0.98);}
   nav.nav-open{background:rgba(10,10,15,1.0);}
+  .guides-grid{grid-template-columns:1fr !important;}
   .logo{font-size:22px;}
   .hamburger{display:flex;}
   .nav-cta{display:none;}
@@ -508,6 +513,7 @@ html{scroll-padding-top:80px;}
 </head>
 <body>
 
+<div class="nav-overlay" id="nav-overlay" onclick="closeNav()"></div>
 <nav>
   <div class="logo" onclick="showPage('landing')"><svg width="32" height="32" viewBox="0 0 100 100" style="vertical-align:middle;margin-right:8px;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="44" fill="none" stroke="#52be73" stroke-width="6"/><circle cx="50" cy="50" r="29" fill="none" stroke="#52be73" stroke-width="4" opacity=".6"/><circle cx="50" cy="50" r="14" fill="none" stroke="#52be73" stroke-width="3" opacity=".35"/><line x1="50" y1="50" x2="84" y2="18" stroke="#52be73" stroke-width="5" stroke-linecap="round"/><circle cx="50" cy="50" r="5" fill="#52be73"/></svg>ThePeptide<span>Radar</span></div>
   <ul class="nav-links" id="nav-links">
@@ -1402,11 +1408,13 @@ function toggleNav(){
   document.getElementById('nav-links').classList.toggle('open');
   document.getElementById('hamburger').classList.toggle('open');
   document.querySelector('nav').classList.toggle('nav-open');
+  document.getElementById('nav-overlay').classList.toggle('open');
 }
 function closeNav(){
   document.getElementById('nav-links').classList.remove('open');
   document.getElementById('hamburger').classList.remove('open');
   document.querySelector('nav').classList.remove('nav-open');
+  document.getElementById('nav-overlay').classList.remove('open');
 }
 document.addEventListener('click',function(e){
   var nav=document.getElementById('nav-links');

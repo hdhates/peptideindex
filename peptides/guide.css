@@ -136,6 +136,10 @@ footer::before{content:"";position:absolute;top:-1px;left:50%;transform:translat
 :focus{outline:none;}
 a:focus-visible,button:focus-visible,details:focus-visible,summary:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px;}
 
+/* NAV OVERLAY */
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99;backdrop-filter:blur(2px);}
+.nav-overlay.open{display:block;}
+
 /* Mobile */
 @media(max-width:640px){
   nav{padding:0.85rem 1.25rem;flex-wrap:wrap;align-items:center;background:rgba(10,10,15,0.96);}

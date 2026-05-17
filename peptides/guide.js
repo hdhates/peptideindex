@@ -2,11 +2,21 @@ document.addEventListener('DOMContentLoaded',function(){
   var btn=document.getElementById('hamburger');
   var nav=document.querySelector('.nav-links');
   var navEl=document.querySelector('nav');
+  var overlay=document.getElementById('nav-overlay');
   if(btn&&nav){
     btn.addEventListener('click',function(){
       btn.classList.toggle('open');
       nav.classList.toggle('open');
       if(navEl)navEl.classList.toggle('nav-open');
+      if(overlay)overlay.classList.toggle('open');
+    });
+  }
+  if(overlay){
+    overlay.addEventListener('click',function(){
+      btn.classList.remove('open');
+      nav.classList.remove('open');
+      if(navEl)navEl.classList.remove('nav-open');
+      overlay.classList.remove('open');
     });
   }
   document.querySelectorAll('details.faq-item').forEach(function(d){
